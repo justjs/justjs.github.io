@@ -1,0 +1,13 @@
+{
+  "name": "justjs.github.io",
+  "homepage": "https://justjs.github.io",
+  "description": "Website for JustJs.",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justjs/justjs.github.io.git"
+  },
+  "bugs": {
+    "url": "https://github.com/justjs/justjs.github.io/issues"
+  }
+}

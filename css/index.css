@@ -1,0 +1,202 @@
+.table-wrapper {
+	border: 2px solid #ededed;
+}
+
+.table-wrapper caption {
+	padding: 1em 2em 0 2em;
+}
+
+section {
+	max-width: 55em;
+}
+
+h1, h2 { font-size: 2.15em; }
+h3, h4 { font-size: 1.25em; }
+
+#contentinfo {
+	margin-top: 10%;
+}
+
+main {
+	background: inherit;
+}
+
+#home {
+	height: 100vh;
+	max-height: 1080px;
+	display: table;
+	width: 100%;
+	margin: auto;
+	text-align: left;
+	position: relative;
+	margin-top: -2em;
+	padding: 0 5%;
+	box-sizing: border-box;
+}
+
+main,
+#banner {
+	background: inherit;
+}
+
+#home > .content-wrapper {
+	font-size: 150%;
+	display: table-cell;
+	vertical-align: middle;
+	height: 100%;
+}
+
+#banner {
+	position: fixed; /** fallback */
+	position: sticky;
+	top: 0;
+	left: 0;
+	width: 100%;
+	display: table;
+	text-align: right;
+	box-sizing: border-box;
+	white-space: nowrap;
+	z-index: 999;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, .05);
+	overflow-y: hidden;
+	padding: 0 2em;
+	margin-top: -2em;
+}
+
+#banner > * {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#page-nav li {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#banner .logo {
+	padding: 1em 2em 1em 0;
+}
+
+#page-nav {
+	width: 100%;
+}
+
+#page-nav a {
+	display: block;
+	padding: 1em;
+}
+
+section .content-wrapper > *:not(:last-child) {
+	margin-bottom: 2em;
+}
+
+.code-wrapper code {
+	padding: 2em;
+}
+
+.code-wrapper,
+.table-wrapper {
+	overflow: auto;
+	white-space: nowrap;
+}
+
+.footnote {
+	font-size: 80%;
+	vertical-align: bottom;
+	color: #81858e;
+}
+
+#installation-via-yarn {
+	float: right;
+}
+
+#contentinfo {
+	background: #452653;
+	color: white;
+	padding: 2em;
+	text-align: center;
+}
+
+#contentinfo li {
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	margin-right: 1em;
+}
+
+#contentinfo li::before {
+	content: '• ';
+}
+
+#contentinfo a {
+	color: white;
+}
+
+.release-candidate {
+	opacity: .5;
+}
+
+.badge-link:empty::before {
+	content: '[Loading...]';
+	font-size: 1rem;
+}
+
+#status-badges {
+	float: right;
+}
+
+@media all and (max-width: 720px) {
+	body {
+		font-size: 100%;
+		scroll-behavior: smooth;
+	}
+
+	#home,
+	section {
+		padding-left: 2em;
+		padding-right: 2em;
+	}
+
+	section header {
+		margin-bottom: 3em;
+	}
+
+	figure {
+		display: block;
+		margin: auto;
+	}
+
+	figure:nth-child(2n+1) {
+		margin-left: -2em;
+	}
+
+	figure:nth-child(2n) {
+		margin-left: auto;
+		margin-right: -2em;
+	}
+
+	#installation-via-yarn {
+		float: unset;
+	}
+
+	.table-wrapper {
+		margin-right: -2em;
+	}
+
+	.code-wrapper {
+		/*margin-right: -2em;*/
+		margin: 0 -2em;
+	}
+
+	figure {
+		padding: 2em;
+	}
+
+	#home {
+		text-align: left;
+	}
+
+	#banner {
+		display: block;
+	}
+}

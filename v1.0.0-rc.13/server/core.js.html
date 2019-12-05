@@ -1,0 +1,923 @@
+
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta charset='utf-8'/>
+	<title>Source: core.js - Just js</title>
+	<link type='text/css' rel='stylesheet' href='css/jsdoc-template.css'/>
+	<meta name="viewport" content="width=device-width,
+                        initial-scale=1"/><link rel='shortcut icon' type='image/png' href='/img/favicon-16x16.png'/><link rel='stylesheet' href='../css/jsdoc.css'/>
+</head>
+<body data-gs='{"openPageHeader": "is-page-header-open", "searching": "is-searching"}'>
+	<div id='page-wrapper'>
+		<header id='page-header' data-gs-target='openPageHeader'>
+			
+			<div id='logo'><a href='/'><img src='/img/logo-white-64x64.png' alt='Logo' srcset='/img/logo-white-128x128.png 2x'/></a></div>
+			
+			<nav id='content-nav'>
+				<header>
+					<div id='search'>
+						<div class='textfield-wrapper'>
+							<input type='search' name='q' placeholder='Search...' data-internal-search='#content-nav li a' data-gs-search='searching'/>
+						</div>
+					</div>
+				</header>
+				<h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><abbr title="Namespace">NS</abbr> <a href="just.access.html">access</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.check.html">check</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defaults.html">defaults</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defineProperties.html">defineProperties</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defineProperty.html">defineProperty</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defProp.html">defProp</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defProps.html">defProps</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.eachProp.html">eachProp</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.eachProperty.html">eachProperty</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.emptyObj.html">emptyObj</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.from.html">from</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.is.html">is</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.isEmptyObject.html">isEmptyObject</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.parseUrl.html">parseUrl</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.prop.html">prop</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.stringToJSON.html">stringToJSON</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toJSON.html">toJSON</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toObj.html">toObj</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toObjectLiteral.html">toObjectLiteral</a></li></ul><h3>Mixins</h3><ul><li><abbr title="Mixin">Mix</abbr> <a href="just.html">just</a></li></ul><h3><a href="global.html">Global</a></h3>
+			</nav>
+		</header>
+		<div id='main-wrapper'>
+			<button id='page-header-opener' title='Toggle left bar' class='has-icon' data-css-icon='menu' type='button' data-gs-toggle='openPageHeader'>Toggle left bar</button>
+			<main id='content'>
+				<header>
+					<h1 id='content-title'>Source: core.js</h1>
+				</header>
+				
+
+
+
+    
+    <figure class='source-code-wrapper'>
+        <pre class="prettyprint source linenums"><code>/**
+ * @license
+ * BSD 3-Clause License
+ *
+ * Copyright (c) 2019, Alexis Puga Ruíz
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of the copyright holder nor the names of its
+ *    contributors may be used to endorse or promote products derived from
+ *    this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/**
+ * @preserve Copyright 2019 Alexis Puga Ruíz.
+ * @file Just js: The core for all your javascript proyects.
+ * @version 1.0.0-rc.13
+ */
+(function (fn) {
+
+    if (typeof define === 'function' &amp;&amp; define.amd) { define('just', [], fn); }
+    else if (typeof exports === 'object' &amp;&amp; Object(module).exports) { exports.just = fn(); }
+    else { this.just = fn(); }
+
+}).call(this, function () {
+
+    /* eslint-disable no-unused-vars */
+
+    /**
+     * An absolute, relative or blob url.
+     *
+     * @typedef {string} url
+     * @global
+     */
+
+    /**
+     * The full parts of an url.
+     *
+     * @typedef {Object} url_parts
+     * @property {string} protocol - A protocol (including ":", like "ftp:") or ":".
+     * @property {string} href - An absolute url (like "ftp://username:password@www.example.com:80/a?b=1#c").
+     * @property {string} host - The host (like "www.example.com:80") or an empty string.
+     * @property {string} hostname - A hostname (like "www.example.com").
+     * @property {string} port - The GIVEN port as a number (like "80") or an empty string.
+     * @property {string} pathname - A pathname (like "/a").
+     * @property {string} origin - The origin (like "ftp://www.example.com").
+     * @property {string} search - The query arguments (including "?", like "?b=1") or an empty string.
+     * @property {string} hash - The hash (including '#', like "#c") or an empty string.
+     * @property {string} username - The given username or an empty string.
+     * @property {string} password - The given password or an empty string.
+     */
+
+    /**
+     * Same as the second param for &lt;var>Object.defineProperties&lt;/var>
+     *
+     * @typedef {!object} propertiesDescriptor
+     * @global
+     */
+
+    /**
+     * Same as the third param for &lt;var>Object.defineProperty&lt;/var>
+     *
+     * @typedef {!object} propertyDescriptor
+     * @global
+     */
+
+    /**
+     * A tagName of an Element (such as "link").
+     *
+     * @typedef {string} element_tag
+     */
+
+    /**
+     * @mixin just
+     * @global
+     */
+    var just = {};
+    /**
+     * Register non-writable, non-enumerable and non-configurable members on Just.
+     * @package
+     */
+    var set = function registerMember (name, value) { Object.defineProperty(just, name, {'value': value}); };
+
+    set('register', set);
+    set('version', '1.0.0-rc.13');
+
+    /**
+     * The given object (if &lt;var>mutate&lt;/var> evals to `true`)
+     * or a copy of each own property of the given object.
+     *
+     * @typedef {!object} just.access~handler_this
+     */
+
+    /**
+     * A function to call when {@link just.access} reaches the deep property of an object.
+     *
+     * @typedef {function} just.access~handler
+     * @this just.access~handler_this
+     * @param {!object} lastObject - The object containing the &lt;var>lastKey&lt;/var>.
+     * @param {string} lastKey - The last value given in &lt;var>path&lt;/var>.
+     * @param {boolean} hasProperty - `false` if some key of &lt;var>path&lt;/var>
+     *     was created, `true` otherwise.
+     * @param {string[]} path - The given keys.
+     * @return {*} The return value for {@link just.access|the main function}.
+     */
+
+    /**
+     * Accesses to a deep property in a new &lt;var>object&lt;/var>
+     * (or &lt;var>object&lt;/var> if &lt;var>mutate&lt;/var> evals to `true`).
+     *
+     * @namespace
+     * @memberof just
+     * @param {!object} object - The base object.
+     * @param {string[]} [path=[path]] - The ordered keys.
+     * @param {just.access~handler} [handler=returnValue] - A custom function.
+     * @param {object} opts
+     * @param {boolean} [opts.mutate=false] - If `true`, it will use
+     *     the given object as the base object, otherwise it will
+     *     copy all the owned properties to a new object.
+     * @param {boolean} [opts.override=true] - If `true`, and the
+     *     current value is different to `null` or `undefined`,
+     *     the function will throw a TypeError.
+     *     If `false`, the current value will be overriden by
+     *     an empty object if it's not an object nor `undefined`.
+     *
+     * @throws {TypeError} If some property causes access problems.
+     *
+     * @example &lt;caption>Accessing to some existent property&lt;/caption>
+     * access({a: {b: {c: {d: 4}}}}, ['a', 'b', 'c', 'd'], function (currentObject, currentKey, hasProperty, path) {
+     *     return hasProperty ? currentObject[currentKey] : null;
+     * }); // returns 4.
+     *
+     * @example &lt;caption>Accessing to some property with a non-JSON-like-object as a value&lt;/caption>
+     * access({a: 1}, ['a', 'b', 'c']); // throws TypeError.
+     * access({a: 1}, ['a', 'b', 'c'], null, {
+     *     'override': true
+     * }); // returns undefined.
+     * // Doesn't throw because it replaces `1` with an empty object
+     * // and keeps accessing to the next properties.
+     *
+     * @example &lt;caption>Accessing to some non-existent property&lt;/caption>
+     * var obj = {z: 1, prototype: [...]};
+     * var newObj = access(obj, 'a.b.c'.split('.'), function (currentObject, currentKey, hasProperty, path) {
+     *
+     *     if (!hasProperty) {
+     *         currentObject[currentKey] = path.length;
+     *     }
+     *
+     *     // At this point:
+     *     //     `obj` is {z: 1},
+     *     //     `currentObject` has a value in `currentKey`,
+     *     //     and `this` has all the added keys (even the ones modified in `currentObject`).
+     *     return this;
+     *
+     * }); // returns {z: 1, a: {b: {c: 3}}}
+     *
+     * // if you want the prototype chain of obj, just copy it.
+     * Object.assign(newObj.prototype, obj.prototype);
+     *
+     * @example &lt;caption>Modifying the base object&lt;/caption>
+     * var obj = {a: {b: false}, b: {b: false}, prototype: [...]};
+     *
+     * access(obj, 'a.b'.split('.'), function (currentObject, currentKey, hasProperty, path) {
+     *     currentObject[currentKey] = 2;
+     * }, true);
+     *
+     * // now `obj` is {a: {a: true}, b: {b: true}, prototype: [...]}.
+     *
+     * @return {*} If &lt;var>handler&lt;/var> is given: the returned value of that function,
+     *         otherwise: the last value of &lt;var>path&lt;/var> in the copied object.
+     */
+    function access (object, path, handler, opts) {
+
+        var options = Object.assign({}, {
+            'override': true,
+            'mutate': false
+        }, opts);
+        var properties = Array.isArray(path) ? path : [path];
+        var initialObject = options.mutate ? object : Object.assign({}, object);
+        var currentObject = initialObject;
+        var isNewProperty = false;
+        var lastKey = properties[properties.length - 1];
+        var hasProperty;
+
+        properties.slice(0, -1).forEach(function (key, i) {
+
+            if (!(currentObject[key] instanceof Object)) {
+
+                if (typeof currentObject[key] !== 'undefined'
+                &amp;&amp; currentObject[key] !== null
+                &amp;&amp; !options.override) {
+
+                    throw new TypeError('The value of "' + key +
+                    '" is not an object.');
+
+                }
+
+                isNewProperty = true;
+                currentObject[key] = {};
+
+            }
+
+            currentObject = currentObject[key];
+
+        });
+
+        hasProperty = lastKey in currentObject &amp;&amp; !isNewProperty;
+
+        return (handler
+        ? handler.call(initialObject, currentObject, lastKey, hasProperty, properties)
+        : currentObject[lastKey]
+        );
+
+    }
+
+    set('access', access);
+
+    /**
+     * @mixin just
+     * @borrows just.access as prop
+     */
+    var prop = access;
+
+    set('prop', prop);
+
+    /**
+     * Checks if &lt;var>value&lt;/var> looks like the other values.
+     *
+     * @namespace
+     * @memberof just
+     * @param {*} value - Comparison value.
+     * @param {...*} [otherValues] - Values to check against.
+     *
+     * @example
+     * check(null, {}, "null", []); // false. Neither is `null`.
+     * check({}, [], {}); // true. {} is {}.
+     *
+     * @return {boolean} `true` if some other value looks like &lt;var>value&lt;/var>.
+     */
+    function check (value, otherValues) {
+
+        return [].slice.call(arguments, 1).some(function (otherValue, i) {
+
+            if ([value, otherValue].some(
+                function (v) { return v === null || v === void 0; }
+            )) {
+
+                return otherValue === value;
+
+            }
+
+            return value.constructor === otherValue.constructor;
+
+        });
+
+    }
+
+    defineProperties(check, /** @lends just.check */{
+
+        /**
+         * A custom message to throw.
+         *
+         * @typedef {string} just.check~throwable_message
+         */
+
+        /**
+         * A function that {@link just.check|checks} a value against others and
+         * throws if the result is `false`.
+         *
+         * @function
+         * @this just.check~throwable_message
+         * @param {*} value - Comparison value.
+         * @param {...*} [otherValues] - Values to check against.
+         *
+         * @throws {TypeError} If &lt;var>check&lt;/var> returns `false`.
+         * @returns {value} &lt;var>value&lt;/var> if &lt;var>check&lt;/var> returns `true`.
+         */
+        'throwable': function (value, otherValues) {
+
+            var args = [].slice.call(arguments);
+            var throwableMessage = (!(Object(this) instanceof String) ? (value +
+            ' must be like one of the following values: ' +
+            args.slice(1).map(function (v) { return v + ''; }).join(', ')
+        ) : this);
+
+            if (!check.apply(this, args)) { throw new TypeError(throwableMessage); }
+
+            return value;
+
+        }
+
+    });
+
+    set('check', check);
+
+    /**
+     * @mixin just
+     * @borrows just.check as is
+     */
+    var is = check;
+
+    set('is', is);
+
+    /**
+     * Defaults to &lt;var>defaultValue&lt;/var> if &lt;var>value&lt;/var> looks like
+     * &lt;var>defaultValue&lt;/var>.
+     *
+     * @namespace
+     * @memberof just
+     * @param {*} value - Any value.
+     * @param {*} [defaultValue] - A value with a desired type for &lt;var>value&lt;/var>.
+     *     If an object literal is given, all the keys of &lt;var>value&lt;/var> will &lt;var>default&lt;/var>
+     *     to his corresponding key in this object.
+     * @param {object} opts - Some options.
+     * @param {boolean} [opts.ignoreDefaultKeys=false] - If `false` and &lt;var>defaultValue&lt;/var>
+     *     is an object literal, the default keys will be added to &lt;var>value&lt;/var>
+     *     or checked against this function for each repeated key.
+     * @param {boolean} [opts.checkLooks=true]
+     *     If `true`:
+     *         `[]` will match ONLY with another Array.
+     *         `{}` will match ONLY with another object literal.
+     *     If `false`
+     *         `[]` and `{}` will match with any other object.
+     * @param {boolean} [opts.checkDeepLooks=true]
+     *     Same as &lt;var>checkLooks&lt;/var> but it works with the inner values
+     *     of the objects.
+     * @param {boolean} [opts.ignoreNull=false]
+     *     If `true`, &lt;var>defaultValue&lt;/var>s with null as a value won't be checked
+     *     and any &lt;var>value&lt;/var> (except `undefined`) will be allowed.
+     *
+     * @example
+     * defaults([1, 2], {a: 1}); // {a: 1}
+     *
+     * @example
+     * defaults({}, null); // null: null is not an object literal.
+     * defaults([], null, {'checkLooks': false}); // []: null is an object.
+     * defaults(null, {}); // {}: null is not an object literal.
+     * defaults(null, []); // []: null is not an Array.
+     *
+     * @example
+     * defaults(1, NaN); // 1 (NaN is an instance of a Number)
+     *
+     * @example
+     * defaults({'a': 1, 'b': 2}, {'a': 'some string'}, {'ignoreDefaultKeys': false}); // {'a': 'some string', 'b': 2}
+     *
+     * @example
+     * defaults({'a': 1}, {'b': 2}, {'ignoreDefaultKeys': false}); // {'a': 1, 'b': 2}
+     * defaults({'a': 1}, {'b': 2}, {'ignoreDefaultKeys': true}); // {'a': 1}
+     *
+     * @example
+     * defaults(1, null, {'ignoreNull': false}) // null (1 is not an object)
+     * defaults(1, null, {'ignoreNull': true}) // 1
+     * defaults(undefined, null, {'ignoreNull': true}) // null
+     * defaults({a: 1}, {a: null}, {'ignoreNull': true}) // {a: 1}
+     *
+     * @returns {value} &lt;var>value&lt;/var> if it looks like &lt;var>defaultValue&lt;/var> or &lt;var>defaultValue&lt;/var> otherwise.
+     */
+    function defaults (value, defaultValue, opts) {
+
+        var options = Object.assign({}, {
+            'ignoreDefaultKeys': false,
+            'checkLooks': true,
+            'checkDeepLooks': true,
+            'ignoreNull': false
+        }, opts);
+
+        /* eslint-disable padded-blocks */
+        if (options.ignoreNull &amp;&amp; defaultValue === null &amp;&amp; value !== void 0) {
+            return value;
+        }
+        /* eslint-enable padded-blocks */
+
+        if (options.checkLooks) {
+
+            /* eslint-disable padded-blocks */
+            if (!check(value, defaultValue)) {
+                return defaultValue;
+            }
+            /* eslint-enable padded-blocks */
+
+            if (check(value, {}) &amp;&amp; options.checkDeepLooks) {
+
+                eachProperty(defaultValue, function (v, k) {
+
+                    if (typeof value[k] !== 'undefined') {
+
+                        value[k] = defaults(value[k], v, options);
+
+                    }
+                    else if (!options.ignoreDefaultKeys) {
+
+                        value[k] = v;
+
+                    }
+
+                });
+
+            }
+
+            return value;
+
+        }
+
+        return (typeof value === typeof defaultValue
+        ? value
+        : defaultValue
+        );
+
+    }
+
+    set('defaults', defaults);
+
+    /**
+     * @mixin just
+     * @borrows just.defaults as from
+     */
+    var from = defaults;
+
+    set('from', from);
+
+    /**
+     * Alternative to &lt;var>Object.defineProperties&lt;/var>.
+     *
+     * @see {@link defineProperty} for more details.
+     * @namespace
+     * @memberof just
+     * @param {!object} object
+     * @param {!object.&lt;key, propertyDescriptor>|!object.&lt;key, value>} properties
+     * @return &lt;var>object&lt;/var>
+     */
+    function defineProperties (object, properties) {
+
+        eachProperty(properties, function (value, key) {
+
+            defineProperty(object, key, value);
+
+        });
+
+        return object;
+
+    }
+
+    set('defineProperties', defineProperties);
+
+    /**
+     * @mixin just
+     * @borrows just.defineProperties as defProps
+     */
+    var defProps = defineProperties;
+
+    set('defProps', defProps);
+
+    /**
+     * Alternative to &lt;var>Object.defineProperty&lt;/var> with more enhancements.
+     *
+     * If &lt;var>object&lt;/var> contains any other key that's not a valid attribute for a
+     * {@link propertyDescriptor|property descriptor} the value WON'T be used
+     * as a property descriptor. I.e:
+     * &lt;code>
+     * defineProperty({}, 'property', {
+     *     value: 1,
+     *     other: 'value'
+     * }).property; // > {value: 1, other: 'value'}
+     * &lt;/code>
+     *
+     * Note: Empty objects will be considered values rather than property descriptors.
+     *
+     * @namespace
+     * @memberof just
+     * @throws &lt;var>Object.defineProperty&lt;/var> exceptions.
+     * @param {!object} object - The target.
+     * @param {string} key - Key for the property.
+     * @param {!object} [value={value}] - A {@link propertyDescriptor} or some value.
+     * @return &lt;var>object&lt;/var>.
+     */
+    function defineProperty (object, key, value) {
+
+        var descriptor = Object(value);
+        var defaultAttributes = Object.assign(Object.getOwnPropertyDescriptor(
+            Object.defineProperty({}, '_', {}), '_'
+        ), {
+            'get': void 0,
+            'set': void 0
+        });
+
+        if ((value || {}).constructor !== ({}).constructor || !Object.keys(defaultAttributes).some(
+            function (key) { return key in descriptor; }
+        ) || !Object.keys(descriptor).every(
+            function (key) { return key in defaultAttributes; }
+        )) {
+
+            descriptor = {
+                'value': value
+            };
+
+        }
+
+        Object.defineProperty(object, key, descriptor);
+
+        return object;
+
+    }
+
+    set('defineProperty', defineProperty);
+
+    /**
+     * @mixin just
+     * @borrows just.defineProperty as defProp
+     */
+    var defProp = defineProperty;
+
+    set('defProp', defProp);
+
+    /**
+     * @typedef {function} just.eachProperty~fn
+     *
+     * @this {@link just.eachProperty|&lt;var>thisArg&lt;/var> from the main function}.
+     *
+     * @param {*} value - The current value.
+     * @param {*} key - The current key.
+     * @param {!object} object - The current object being iterated.
+     *
+     * @return {boolean} If `true`, the current loop will stop.
+     */
+
+    /**
+     * Converts &lt;var>object&lt;/var> to an Object, iterates over it,
+     * calls a function on each iteration, and if a truthy value
+     * is returned from that function, the loop will stop.
+     *
+     * @namespace
+     * @memberof just
+     * @param {*} object - Some value.
+     * @param {just.eachProperty~fn} fn - The function that will be
+     *     called on each iteration.
+     * @param {*} [thisArg] - &lt;var>this&lt;/var> for &lt;var>fn&lt;/var>.
+     * @param {object} opts - Some options.
+     * @param {boolean} [opts.addNonOwned=false] - Include non-owned properties.
+     *     `false`: iterate only the owned properties.
+     *     `true`: iterate the (enumerable) inherited properties too.
+     *
+     * @throws {TypeError} If &lt;var>fn&lt;/var> is not a function.
+     * @return {boolean} `true` if the function was interrupted, `false` otherwise.
+     */
+    function eachProperty (object, fn, thisArg, opts) {
+
+        var properties = Object(object);
+        var options = Object.assign({}, {
+            'addNonOwned': false
+        }, opts);
+        var wasInterrupted = false;
+        var k;
+
+        /* eslint-disable padded-blocks */
+        if (typeof fn !== 'function') {
+            throw new TypeError(fn + ' is not a function.');
+        }
+        /* eslint-enable padded-blocks */
+
+        for (k in properties) {
+
+            if (wasInterrupted) { break; }
+
+            if (options.addNonOwned || ({}).hasOwnProperty.call(properties, k)) {
+
+                wasInterrupted = !!fn.call(thisArg, properties[k], k,
+                    properties);
+
+            }
+
+        }
+
+        return wasInterrupted;
+
+    }
+
+    set('eachProperty', eachProperty);
+
+    /**
+     * @mixin just
+     * @borrows just.eachProperty as eachProp
+     */
+    var eachProp = eachProperty;
+
+    set('eachProp', eachProp);
+
+    /**
+     * Checks if an object has no direct keys.
+     *
+     * @namespace
+     * @memberof just
+     * @param {*} [object=Object(object)] - Some object.
+     * @return {boolean} `true` if the object doesn't contain owned properties,
+     *     `false` otherwise.
+     */
+    function isEmptyObject (object) {
+
+        return !eachProperty(object, function () { return true; });
+
+    }
+
+    set('isEmptyObject', isEmptyObject);
+
+    /**
+     * @mixin just
+     * @borrows just.isEmptyObject as emptyObj
+     */
+    var emptyObj = isEmptyObject;
+
+    set('emptyObj', emptyObj);
+
+    /**
+     * Parses &lt;var>url&lt;/var> without checking if it's a valid url.
+     *
+     * Note that this function uses &lt;var>window.location&lt;/var> to make relative urls, so
+     * weird values in there will give weird results.
+     *
+     * @namespace
+     * @memberof just
+     * @param {url} [url=window.location.href] - A relative, an absolute or a blob url.
+     *
+     * @example &lt;caption>An absolute url:&lt;/caption>
+     * parseUrl(window.location.href);
+     *
+     * @example &lt;caption>A relative url:&lt;/caption>
+     * parseUrl('/?a#c?d'); // "/" is the pathname, "?a" the search and "#c?d" the hash.
+     *
+     * @example &lt;caption>A blob url:&lt;/caption>
+     * parseUrl('blob:'); // Same as 'blob:' + `window.location.href`
+     *
+     * @example &lt;caption>Some good-to-know urls:&lt;/caption>
+     * parseUrl(); // Same as `window.location`.
+     * parseUrl('a'); // Something that doesn't start with "/", "?", or "#" is evaluated as a host.
+     * parseUrl('a:b'); // "a:b" is a host, since "b" is not a number.
+     * parseUrl('//'); // evals as the current origin.
+     * parseUrl('blob://'); // Same as 'blob:' + `window.location.origin`.
+     * // [...]
+     *
+     * @return {url_parts}
+     */
+    function parseUrl (url) {
+
+        var parts = {};
+        var loc = window.location;
+        var optionalParts, hrefParts, id, uriParts, domainParts, hostParts,
+            userParts, passwordParts;
+        var blob;
+
+        url = url || loc.href;
+
+        if (/^blob:/i.test(url)) {
+
+            blob = parseUrl(url.replace(/^blob:/i, ''));
+
+            return Object.assign(blob, {
+                'protocol': 'blob:',
+                'href': 'blob:' + blob.href,
+                'host': '',
+                'hostname': '',
+                'port': '',
+                'pathname': blob.origin + blob.pathname
+            });
+
+        }
+
+        if (/^(:)?\/\//.test(url)) {
+
+            url = ((url = url.replace(/^:/, '')) === '//'
+            ? loc.origin
+            : loc.protocol + url
+            );
+
+        }
+        else if (/^(\?|#|\/)/.test(url)) {
+
+            url = loc.origin + url;
+
+        }
+        else if (!/:\/\//.test(url)) {
+
+            url = loc.protocol + '//' + url;
+
+        }
+
+        hrefParts = (url || '').split(/(\?.*#?|#.*\??).*/);
+        optionalParts = (hrefParts[1] || '').split('#');
+        id = optionalParts[1] || '';
+
+        parts.search = optionalParts[0] || '';
+        parts.hash = (id ? '#' + id : id);
+
+        uriParts = (hrefParts[0] || '').split('://');
+
+        hostParts = (uriParts[1] || '').split(/(\/.*)/);
+
+        parts.username = '';
+        parts.password = '';
+
+        if (/@/.test(hostParts[0])) {
+
+            userParts = hostParts[0].split('@');
+            passwordParts = userParts[0].split(':');
+            parts.username = passwordParts[0] || '';
+            parts.password = passwordParts[1] || '';
+            hostParts[0] = userParts[1];
+
+        }
+
+        parts.host = hostParts[0] || '';
+        parts.pathname = hostParts[1] || '';
+
+        domainParts = parts.host.split(/:([0-9]+)/);
+
+        parts.hostname = domainParts[0] || '';
+        parts.port = (typeof domainParts[1] !== 'undefined'
+        ? domainParts[1]
+        : ''
+        );
+
+        parts.protocol = uriParts[0] + ':';
+        parts.origin = parts.protocol + '//' + parts.host;
+
+        parts.href = (userParts
+        ? parts.protocol + '//' + parts.username + ':' + parts.password + '@' + parts.host
+        : parts.origin
+        ) + parts.pathname + parts.search + parts.hash;
+
+        return parts;
+
+    }
+
+    set('parseUrl', parseUrl);
+
+    /**
+     * Parses a JSON string into a JSON.
+     *
+     * @namespace
+     * @memberof just
+     * @param {*} string - Some string to parse.
+     *
+     * @example
+     * stringToJSON('{"a": 1}'); // returns {a: 1}.
+     *
+     * @example
+     * stringToJSON(1); // returns {}.
+     *
+     * @return {!object} A JSON-like object.
+     */
+    function stringToJSON (string) {
+
+        var json;
+
+        if (!/\{.+\}/.test(string)) { return {}; }
+
+        try { json = JSON.parse(string); }
+        catch (exception) { return {}; }
+
+        return json;
+
+    }
+
+    set('stringToJSON', stringToJSON);
+
+    /**
+     * @mixin just
+     * @borrows just.stringToJSON as toJSON
+     */
+    var toJSON = stringToJSON;
+
+    set('toJSON', toJSON);
+
+    /**
+     * Converts &lt;code>[[k0, v0], {k1: v1}]&lt;/code> to &lt;code>{k0: v0, k1: v1}&lt;/code>.
+     *
+     * @namespace
+     * @memberof just
+     * @param {!object[]|!object} array - An array containing sub-arrays
+     *     with object literal pairs, or object literals: &lt;code>[[k, v], {k: v}]&lt;/code>.
+     *
+     * @return {!object} An object literal.
+     */
+    function toObjectLiteral (array) {
+
+        var objectLiteral = {};
+
+        /* eslint-disable padded-blocks */
+        if (check(array, {}, null)) {
+            return Object.assign({}, array);
+        }
+
+        if (!check(array, [])) {
+            throw new TypeError(array + ' must be either ' +
+			'null, an object literal or an Array.');
+        }
+        /* eslint-enable padded-blocks */
+
+        array.forEach(function (subArray) {
+
+            var key, value;
+
+            if (check(subArray, [])) {
+
+                key = subArray[0];
+                value = subArray[1];
+                this[key] = value;
+
+            }
+            else if (check(subArray, {})) {
+
+                Object.assign(this, subArray);
+
+            }
+            else {
+
+                throw new TypeError(subArray + ' must be either ' +
+				'an object literal or an Array.');
+
+            }
+
+        }, objectLiteral);
+
+        return objectLiteral;
+
+    }
+
+    set('toObjectLiteral', toObjectLiteral);
+
+    /**
+     * @mixin just
+     * @borrows just.toObjectLiteral as toObj
+     */
+    var toObj = toObjectLiteral;
+
+    set('toObj', toObj);
+
+
+    return just;
+
+});
+</code></pre>
+    </figure>
+
+
+
+
+
+			</main>
+			<footer id='page-footer'>
+				<small>Documentation generated by <a href='https://github.com/jsdoc/jsdoc' rel='noreferrer noopener' target='_blank'>JSDoc 3.6.3</a>.</small>
+				<small style='margin-left: 1em;'>Design by <a
+                        href='https://github.com/AlexisPuga'
+                        target='_blank'
+                        rel="noopener noreferrer">Alexis Puga</a>.</small>
+			</footer>
+		</div>
+	</div>
+	<script src='js/jsdoc-template.js' async></script>
+	
+	<script src='js/prettify.min.js' async></script>
+	<link rel='stylesheet' type='text/css' href='css/tomorrow.min.css'/>
+	
+	
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta charset='utf-8'/>
+	<title>Namespace: eachProp - Just js</title>
+	<link type='text/css' rel='stylesheet' href='css/jsdoc-template.css'/>
+	<meta name="viewport" content="width=device-width,
+                        initial-scale=1"/><link rel='shortcut icon' type='image/png' href='/img/favicon-16x16.png'/><link rel='stylesheet' href='../css/jsdoc.css'/>
+</head>
+<body data-gs='{"openPageHeader": "is-page-header-open", "searching": "is-searching"}'>
+	<div id='page-wrapper'>
+		<header id='page-header' data-gs-target='openPageHeader'>
+			
+			<div id='logo'><a href='/'><img src='/img/logo-white-64x64.png' alt='Logo' srcset='/img/logo-white-128x128.png 2x'/></a></div>
+			
+			<nav id='content-nav'>
+				<header>
+					<div id='search'>
+						<div class='textfield-wrapper'>
+							<input type='search' name='q' placeholder='Search...' data-internal-search='#content-nav li a' data-gs-search='searching'/>
+						</div>
+					</div>
+				</header>
+				<h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><abbr title="Namespace">NS</abbr> <a href="just.access.html">access</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.check.html">check</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defaults.html">defaults</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defineProperties.html">defineProperties</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defineProperty.html">defineProperty</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defProp.html">defProp</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defProps.html">defProps</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.eachProp.html">eachProp</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.eachProperty.html">eachProperty</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.emptyObj.html">emptyObj</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.from.html">from</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.is.html">is</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.isEmptyObject.html">isEmptyObject</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.parseUrl.html">parseUrl</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.prop.html">prop</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.stringToJSON.html">stringToJSON</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toJSON.html">toJSON</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toObj.html">toObj</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toObjectLiteral.html">toObjectLiteral</a></li></ul><h3>Mixins</h3><ul><li><abbr title="Mixin">Mix</abbr> <a href="just.html">just</a></li></ul><h3><a href="global.html">Global</a></h3>
+			</nav>
+		</header>
+		<div id='main-wrapper'>
+			<button id='page-header-opener' title='Toggle left bar' class='has-icon' data-css-icon='menu' type='button' data-gs-toggle='openPageHeader'>Toggle left bar</button>
+			<main id='content'>
+				<header>
+					<h1 id='content-title'>Namespace: eachProp</h1>
+				</header>
+				
+
+
+
+<article class='doc' data-kind='namespace' id='eachProp'>
+
+<header>
+  
+    <h2><span class="attribs"><span class="type-signature"></span></span>
+        <span class="ancestors"><a href="just.html">just</a>.</span><a href='#eachProp'>eachProp</a><span class="signature">(object, fn, thisArg<span class="signature-attributes">opt</span>, opts)</span><span class="type-signature"> &rarr; {boolean}</span></h2>
+    
+        
+    
+  
+</header>
+
+    <div class="container-overview">
+    
+        
+<div id="eachProp" class='method member'>
+
+    
+
+    
+
+    
+
+
+
+<div class="description">
+    Converts <var>object</var> to an Object, iterates over it,
+calls a function on each iteration, and if a truthy value
+is returned from that function, the loop will stop.
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line572">line 572</a>
+    </dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+    <h3>Parameters:</h5>
+    
+<div class='table-wrapper'>
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>object</var>
+                <br/>
+                
+                    <sub class="attributes">
+                    
+
+                    
+
+                    
+                    </sub>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Any</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last">Some value.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>fn</var>
+                <br/>
+                
+                    <sub class="attributes">
+                    
+
+                    
+
+                    
+                    </sub>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="just.eachProperty.html#~fn">just.eachProperty~fn</a></span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last">The function that will be
+    called on each iteration.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>thisArg</var>
+                <br/>
+                
+                    <sub class="attributes">
+                    
+                        [optional]
+                    
+
+                    
+
+                    
+                    </sub>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Any</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last"><var>this</var> for <var>fn</var>.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>opts</var>
+                <br/>
+                
+                    <sub class="attributes">
+                    
+
+                    
+
+                    
+                    </sub>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last">Some options.
+                <h6>Properties</h6>
+                
+<div class='table-wrapper'>
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>addNonOwned</var>
+                <br/>
+                
+                    <sub class="attributes">
+                    
+                        [optional]
+                    
+
+                    
+
+                    
+                    </sub>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">Include non-owned properties.
+    `false`: iterate only the owned properties.
+    `true`: iterate the (enumerable) inherited properties too.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</div>
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<div class="param-desc">
+If <var>fn</var> is not a function.
+</div>
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">TypeError</span>
+
+
+    </dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h3>
+
+        
+<div class="param-desc">
+    `true` if the function was interrupted, `false` otherwise.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+</div>
+    
+  </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</article>
+
+
+
+
+			</main>
+			<footer id='page-footer'>
+				<small>Documentation generated by <a href='https://github.com/jsdoc/jsdoc' rel='noreferrer noopener' target='_blank'>JSDoc 3.6.3</a>.</small>
+				<small style='margin-left: 1em;'>Design by <a
+                        href='https://github.com/AlexisPuga'
+                        target='_blank'
+                        rel="noopener noreferrer">Alexis Puga</a>.</small>
+			</footer>
+		</div>
+	</div>
+	<script src='js/jsdoc-template.js' async></script>
+	
+	<script src='js/prettify.min.js' async></script>
+	<link rel='stylesheet' type='text/css' href='css/tomorrow.min.css'/>
+	
+	
+</body>
+</html>

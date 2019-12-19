@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
 	<meta charset='utf-8'/>
-	<title>Home - Just js</title>
+	<title>Class: Def - Just js</title>
 	<link type='text/css' rel='stylesheet' href='css/jsdoc-template.css'/>
 	<meta name="viewport" content="width=device-width,
                         initial-scale=1"/><link rel='shortcut icon' type='image/png' href='/img/favicon-16x16.png'/><link rel='stylesheet' href='../css/jsdoc.css'/>
@@ -28,41 +28,18 @@
 			<button id='page-header-opener' title='Toggle left bar' class='has-icon' data-css-icon='menu' type='button' data-gs-toggle='openPageHeader'>Toggle left bar</button>
 			<main id='content'>
 				<header>
-					<h1 id='content-title'>Home</h1>
+					<h1 id='content-title'>Class: Def</h1>
 				</header>
 				
 
 
 
-    
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-<article class='doc' data-kind='file' id='core.js'>
+<article class='doc' data-kind='class' id='Def'>
 
 <header>
   
-    <h2><a href='#core.js'>core.js</a></h2>
+    <h2><span class="attribs"><span class="type-signature"></span></span>
+        <span class="ancestors"><a href="just.html">just</a>.</span><a href='#Def'>Def</a><span class="signature">(id<span class="signature-attributes">non-null</span>, dependencyIDs, value)</span><span class="type-signature"></span></h2>
     
         
     
@@ -72,16 +49,52 @@
     <div class="container-overview">
     
         
-            <div class="description">Just js: The core for all your javascript proyects.</div>
-        
+<div id="Def" class='method member'>
 
-        
+    
+
+    
+    
+    
+
+    
+
+
+
+<div class="description">
+    A module loader: it loads <a href="just.Define.html#~file">files</a> in order (when needed) and
+execute them when all his dependencies became available.
+
+<br/>
+<aside class='note'>
+    <h3>A few things to consider: </h3>
+    <ul>
+        <li>This is not intended to be AMD compliant.</li>
+
+        <li>This does not check file contents, so it won't check if the
+            file defines an specific id.</li>
+
+        <li>Urls passed as dependencies are considered ids, so they must
+            be aliased first in order to be loaded.</li>
+
+        <li><var>require</var>, <var>module</var> and <var>exports</var>
+            are not present in this loader.</li>
+
+        <li>Anonymous modules are not allowed.</li>
+    </ul>
+    <h3>Debugging errors in your code might be difficult:</h3>
+    <p>Since v1.0.0-rc.18, every exception that occur in your code will
+    be outputed to console via console.error. If someday you found an error,
+    make sure to check the last exception first, in order to solve it, because
+    that might be the problem.</p>
+</aside>
+</div>
+
+
+
 <dl class="details">
 
     
-    <dt class="tag-version">Version:</dt>
-    <dd class="tag-version">1.0.0-rc.17</dd>
-    
 
     
 
@@ -101,9 +114,6 @@
 
     
 
-    
-    <dt class="tag-license">License:</dt>
-    <dd class="tag-license">Copyright 2019 Alexis Puga Ruíz.</dd>
     
 
     
@@ -111,7 +121,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source">
-        <a href="core.js.html">core.js</a>, <a href="core.js.html#line34">line 34</a>
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line1628">line 1628</a>
     </dd>
     
 
@@ -125,105 +135,144 @@
 
 
 
+
+
+
+
+
+
+
+    <h3>Parameters:</h5>
+    
+<div class='table-wrapper'>
+<table class="params">
+    <thead>
+    <tr>
         
-    
-  </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-</article>
-
-
-
-
-
-
-<article class='doc' data-kind='file' id='core.min.js'>
-
-<header>
-  
-    <h2><a href='#core.min.js'>core.min.js</a></h2>
-    
-        
-    
-  
-</header>
-
-    <div class="container-overview">
-    
-        
-            <div class="description">Just js: The core for all your javascript proyects.</div>
+        <th>Name</th>
         
 
-        
-<dl class="details">
-
-    
-    <dt class="tag-version">Version:</dt>
-    <dd class="tag-version">1.0.0-rc.17</dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-license">License:</dt>
-    <dd class="tag-license">Copyright 2019 Alexis Puga Ruíz.</dd>
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source">
-        <a href="core.min.js.html">core.min.js</a>, <a href="core.min.js.html#line33">line 33</a>
-    </dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
+        <th>Type</th>
 
         
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>id</var>
+                <br/>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last">The module id.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>dependencyIDs</var>
+                <br/>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string[]</span>
+ or 
+
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last">Required module ids.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>value</var>
+                <br/>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Any</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last">The module value.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h3>
+    
+    <div class='example-wrapper'>
+    <figure class='example'>
+        <figcaption class="code-caption" hidden><b>Example 1.</b></figcaption>
+        <pre class="prettyprint"><code>var files = just.Define.findInDocument('data-files');
+var fileIDs = Object.keys(files);
+
+just.Define.load(files);
+just.Define('some id', fileIDs, function (file1, file2, ...) {
+    // Loads after all ids have been defined.
+});</code></pre>
+    </figure>
+    </div>
+
+
+</div>
     
   </div>
 

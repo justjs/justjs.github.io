@@ -73,7 +73,7 @@
 /**
  * @preserve Copyright 2019 Alexis Puga Ruíz.
  * @file Just js: The core for all your javascript proyects.
- * @version 1.0.0-rc.18
+ * @version 1.0.0-rc.19
  */
 (function (fn) {
 
@@ -1627,6 +1627,10 @@
          *
          * &lt;br/>
          * &lt;aside class='note'>
+         *     &lt;h3>just.Define might not be suitable for production:&lt;/h3>
+         *     &lt;p>Although tests pass everytime, sometimes an error in your code might
+         *     cause dependency errors even when you solve the problem. Please, use it at
+         *     your own risk.&lt;/p>
          *     &lt;h3>A few things to consider: &lt;/h3>
          *     &lt;ul>
          *         &lt;li>This is not intended to be AMD compliant.&lt;/li>
@@ -2158,7 +2162,7 @@
     set('Def', Def);
 
 
-    set('version', '1.0.0-rc.18'); set('just', just);
+    set('version', '1.0.0-rc.19'); set('just', just);
 
     return just;
 

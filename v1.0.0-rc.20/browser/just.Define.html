@@ -62,8 +62,7 @@
 
 
 <div class="description">
-    A module loader: it loads files when needed and
-execute them when all his dependencies became available.
+    Define a value after all dependencies became available.
 
 <br/>
 <aside class='note'>
@@ -75,10 +74,10 @@ execute them when all his dependencies became available.
             file defines an specific id.</li>
 
         <li>Urls passed as dependencies are considered ids, so they must
-            be defined in <a href="just.Define.html#.urls">just.Define.urls</a> in order to be loaded.</li>
+            be defined in <a href="just.Define.html#.urls">just.Define.urls</a> in order to be loaded first.</li>
 
         <li><var>require</var>, <var>module</var> and <var>exports</var>
-            are not present in this loader.</li>
+            are not present in this loader, but you can emulate them.</li>
 
         <li>Recursive and circular dependencies pass a recursive module
            as argument within another recursive module (instead of the returned value).
@@ -287,15 +286,16 @@ execute them when all his dependencies became available.
         <pre class="prettyprint"><code>// https://some.cdn/js/just.js
 window.just = {'Define': function () {}};
 
-&amp;lt;!DOCTYPE html>
-&amp;lt;html data-just-Define='{"main": "/js/main.js"}'>
-&amp;lt;head>
-   &amp;lt;title>Test&lt;/title>
-   &amp;lt;script src='https://some.cdn/js/just.js' async>&lt;/script>
-&amp;lt;/head>
-&amp;lt;body>
-&amp;lt;/body>
-&amp;lt;/html>
+// index.html
+&lt; !DOCTYPE html>
+&lt; html data-just-Define='{"main": "/js/main.js"}'>
+&lt; head>
+   &lt; title>Test&lt;/title>
+   &lt; script src='https://some.cdn/js/just.js' async>&lt;/script>
+&lt; /head>
+&lt; body>
+&lt; /body>
+&lt; /html>
 
 // /js/main.js
 just.configure({
@@ -360,7 +360,7 @@ just.Define(['non-mobile'], function (html) {
         
             
 <div id=".globals" class='member'>
-<h4 class="name"><span class="type-signature"></span><a href='#.globals'>globals</a><span class="type-signature"></span></h4>
+<h4 class="name"><span class="type-signature"></span><a href='#.globals'>globals</a><span class="type-signature"> :object.&lt;just.Define~id, *></span></h4>
 
 
 
@@ -369,15 +369,19 @@ just.Define(['non-mobile'], function (html) {
     A writable object literal that contains all the values that
 will be defined when required.<br/>
 
-Note: If the value for the global is a string, the property
-will be accessed from window. I.e.:<br/>
-<var>'some.property'</var> will access to <var>window.some.property</var>.<br/>
-
-Note 2: If a module is defined with the same id, the module will take
-precedence.
-
-Note 3: If a non-script is defined with the same id, a non-script value
-will take precedence.
+<aside class='note'>
+    <h3>Notes:</h3>
+    <ul>
+        <li>If the value for the global is a string, the property
+            will be accessed from window. I.e.:
+            <var>'some.property'</var> will access to <var>window.some.property</var>.
+        </li>
+        <li>If a module is defined with the same id, the module will take
+            precedence.</li>
+        <li>If a non-script is defined with the same id, a non-script value
+         will take precedence.</li>
+    </ul>
+</aside>
 </div>
 
 
@@ -411,7 +415,7 @@ will take precedence.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source">
-        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2006">line 2006</a>
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2016">line 2016</a>
     </dd>
     
 
@@ -424,52 +428,13 @@ will take precedence.
 
 
 
-    <h5 class="subsection-title">Properties:</h5>
 
-    
-<div class='table-wrapper'>
-<table class="props">
-    <thead>
-    <tr>
-        
 
-        <th>Type</th>
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-
-            <td class="type">
-            
-                
+    <h5>Type:</h5>
+    <p>
 <span class="param-type">object.&lt;just.Define~id, Any></span>
 
-
-            
-            </td>
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</div>
-
-
-
-
-
+</p>
 
 
 
@@ -520,7 +485,7 @@ Define('main', ['JustJs'], function (just) {
         
             
 <div id=".nonScripts" class='member'>
-<h4 class="name"><span class="type-signature"></span><a href='#.nonScripts'>nonScripts</a><span class="type-signature"></span></h4>
+<h4 class="name"><span class="type-signature"></span><a href='#.nonScripts'>nonScripts</a><span class="type-signature"> :object.&lt;just.Define~id, *></span></h4>
 
 
 
@@ -531,8 +496,11 @@ resources, like css. Since <a href="just.Define.html">Define</a> won't
 check for file contents when loads a new file, you must add
 the value here.</br>
 
-Note: If a module is defined with the same id, the module will take
-precedence.
+<aside class='note'>
+    <h3>Note:</h3>
+    <p>If a module is defined with the same id, the module will take
+    precedence.</p>
+</aside>
 </div>
 
 
@@ -566,7 +534,7 @@ precedence.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source">
-        <a href="core.js.html">core.js</a>, <a href="core.js.html#line1960">line 1960</a>
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line1966">line 1966</a>
     </dd>
     
 
@@ -579,52 +547,13 @@ precedence.
 
 
 
-    <h5 class="subsection-title">Properties:</h5>
 
-    
-<div class='table-wrapper'>
-<table class="props">
-    <thead>
-    <tr>
-        
 
-        <th>Type</th>
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-
-            <td class="type">
-            
-                
+    <h5>Type:</h5>
+    <p>
 <span class="param-type">object.&lt;just.Define~id, Any></span>
 
-
-            
-            </td>
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</div>
-
-
-
-
-
+</p>
 
 
 
@@ -648,7 +577,7 @@ Define('load css', ['/css/index.css'], function (css) {
         
             
 <div id=".STATE_CALLED" class='member'>
-<h4 class="name"><span class="type-signature"></span><a href='#.STATE_CALLED'>STATE_CALLED</a><span class="type-signature"></span></h4>
+<h4 class="name"><span class="type-signature"></span><a href='#.STATE_CALLED'>STATE_CALLED</a><span class="type-signature"> :number</span></h4>
 
 
 
@@ -701,52 +630,13 @@ Define('load css', ['/css/index.css'], function (css) {
 
 
 
-    <h5 class="subsection-title">Properties:</h5>
 
-    
-<div class='table-wrapper'>
-<table class="props">
-    <thead>
-    <tr>
-        
 
-        <th>Type</th>
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-
-            <td class="type">
-            
-                
+    <h5>Type:</h5>
+    <p>
 <span class="param-type">number</span>
 
-
-            
-            </td>
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</div>
-
-
-
-
-
+</p>
 
 
 
@@ -756,7 +646,7 @@ Define('load css', ['/css/index.css'], function (css) {
         
             
 <div id=".STATE_CALLING" class='member'>
-<h4 class="name"><span class="type-signature"></span><a href='#.STATE_CALLING'>STATE_CALLING</a><span class="type-signature"></span></h4>
+<h4 class="name"><span class="type-signature"></span><a href='#.STATE_CALLING'>STATE_CALLING</a><span class="type-signature"> :number</span></h4>
 
 
 
@@ -809,52 +699,13 @@ Define('load css', ['/css/index.css'], function (css) {
 
 
 
-    <h5 class="subsection-title">Properties:</h5>
 
-    
-<div class='table-wrapper'>
-<table class="props">
-    <thead>
-    <tr>
-        
 
-        <th>Type</th>
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-
-            <td class="type">
-            
-                
+    <h5>Type:</h5>
+    <p>
 <span class="param-type">number</span>
 
-
-            
-            </td>
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</div>
-
-
-
-
-
+</p>
 
 
 
@@ -864,7 +715,7 @@ Define('load css', ['/css/index.css'], function (css) {
         
             
 <div id=".STATE_DEFINED" class='member'>
-<h4 class="name"><span class="type-signature"></span><a href='#.STATE_DEFINED'>STATE_DEFINED</a><span class="type-signature"></span></h4>
+<h4 class="name"><span class="type-signature"></span><a href='#.STATE_DEFINED'>STATE_DEFINED</a><span class="type-signature"> :number</span></h4>
 
 
 
@@ -917,52 +768,13 @@ Define('load css', ['/css/index.css'], function (css) {
 
 
 
-    <h5 class="subsection-title">Properties:</h5>
 
-    
-<div class='table-wrapper'>
-<table class="props">
-    <thead>
-    <tr>
-        
 
-        <th>Type</th>
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-
-            <td class="type">
-            
-                
+    <h5>Type:</h5>
+    <p>
 <span class="param-type">number</span>
 
-
-            
-            </td>
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</div>
-
-
-
-
-
+</p>
 
 
 
@@ -972,7 +784,7 @@ Define('load css', ['/css/index.css'], function (css) {
         
             
 <div id=".STATE_NON_CALLED" class='member'>
-<h4 class="name"><span class="type-signature"></span><a href='#.STATE_NON_CALLED'>STATE_NON_CALLED</a><span class="type-signature"></span></h4>
+<h4 class="name"><span class="type-signature"></span><a href='#.STATE_NON_CALLED'>STATE_NON_CALLED</a><span class="type-signature"> :number</span></h4>
 
 
 
@@ -1026,52 +838,13 @@ prior to be called.
 
 
 
-    <h5 class="subsection-title">Properties:</h5>
 
-    
-<div class='table-wrapper'>
-<table class="props">
-    <thead>
-    <tr>
-        
 
-        <th>Type</th>
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-
-            <td class="type">
-            
-                
+    <h5>Type:</h5>
+    <p>
 <span class="param-type">number</span>
 
-
-            
-            </td>
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</div>
-
-
-
-
-
+</p>
 
 
 
@@ -1081,7 +854,7 @@ prior to be called.
         
             
 <div id=".urls" class='member'>
-<h4 class="name"><span class="type-signature"></span><a href='#.urls'>urls</a><span class="type-signature"></span></h4>
+<h4 class="name"><span class="type-signature"></span><a href='#.urls'>urls</a><span class="type-signature"> :object.&lt;just.Define~id, <a href="global.html#url">url</a>></span></h4>
 
 
 
@@ -1090,9 +863,12 @@ prior to be called.
     A list of urls that will be used (instead of ids) to load
 files before defining globals or non-script values.<br/>
 
-If you need to load files when you require some id,
-you need to specify those urls here. If you do so, you
-must <a href="just.Define.html">Define</a> that id/url within that file.
+<aside class='note'>
+    <h3>Note:</h3>
+    <p>If you need to load files when you require some id,
+       you need to specify those urls here. If you do so, you
+       must <a href="just.Define.html">Define</a> that id/url within that file.</p>
+</aside>
 </div>
 
 
@@ -1126,7 +902,7 @@ must <a href="just.Define.html">Define</a> that id/url within that file.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source">
-        <a href="core.js.html">core.js</a>, <a href="core.js.html#line1938">line 1938</a>
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line1941">line 1941</a>
     </dd>
     
 
@@ -1139,52 +915,13 @@ must <a href="just.Define.html">Define</a> that id/url within that file.
 
 
 
-    <h5 class="subsection-title">Properties:</h5>
 
-    
-<div class='table-wrapper'>
-<table class="props">
-    <thead>
-    <tr>
-        
 
-        <th>Type</th>
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-
-            <td class="type">
-            
-                
+    <h5>Type:</h5>
+    <p>
 <span class="param-type">object.&lt;just.Define~id, <a href="global.html#url">url</a>></span>
 
-
-            
-            </td>
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</div>
-
-
-
-
-
+</p>
 
 
 
@@ -1282,7 +1019,7 @@ Define('foo-bar', ['foo', 'bar'], function () {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source">
-        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2052">line 2052</a>
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2062">line 2062</a>
     </dd>
     
 
@@ -1371,7 +1108,7 @@ Define('foo-bar', ['foo', 'bar'], function () {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source">
-        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2077">line 2077</a>
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2087">line 2087</a>
     </dd>
     
 
@@ -1507,7 +1244,7 @@ Define('foo-bar', ['foo', 'bar'], function () {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source">
-        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2069">line 2069</a>
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2079">line 2079</a>
     </dd>
     
 
@@ -1596,7 +1333,7 @@ Define('foo-bar', ['foo', 'bar'], function () {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source">
-        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2039">line 2039</a>
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2049">line 2049</a>
     </dd>
     
 
@@ -1756,7 +1493,7 @@ attribute and parsing that attribute as a JSON.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source">
-        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2145">line 2145</a>
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2155">line 2155</a>
     </dd>
     
 
@@ -1982,7 +1719,7 @@ findUrlsInDocument('data-urls');
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source">
-        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2086">line 2086</a>
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2096">line 2096</a>
     </dd>
     
 
@@ -2149,7 +1886,7 @@ if some is called "main", it loads it.<br/>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source">
-        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2102">line 2102</a>
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2112">line 2112</a>
     </dd>
     
 
@@ -2238,7 +1975,7 @@ if some is called "main", it loads it.<br/>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source">
-        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2016">line 2016</a>
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2026">line 2026</a>
     </dd>
     
 
@@ -2345,7 +2082,7 @@ if some is called "main", it loads it.<br/>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source">
-        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2024">line 2024</a>
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2034">line 2034</a>
     </dd>
     
 
@@ -2525,7 +2262,7 @@ if some is called "main", it loads it.<br/>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source">
-        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2172">line 2172</a>
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line2182">line 2182</a>
     </dd>
     
 

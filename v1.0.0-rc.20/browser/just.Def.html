@@ -62,8 +62,7 @@
 
 
 <div class="description">
-    A module loader: it loads files when needed and
-execute them when all his dependencies became available.
+    Define a value after all dependencies became available.
 
 <br/>
 <aside class='note'>
@@ -75,10 +74,10 @@ execute them when all his dependencies became available.
             file defines an specific id.</li>
 
         <li>Urls passed as dependencies are considered ids, so they must
-            be defined in <a href="just.Define.html#.urls">just.Define.urls</a> in order to be loaded.</li>
+            be defined in <a href="just.Define.html#.urls">just.Define.urls</a> in order to be loaded first.</li>
 
         <li><var>require</var>, <var>module</var> and <var>exports</var>
-            are not present in this loader.</li>
+            are not present in this loader, but you can emulate them.</li>
 
         <li>Recursive and circular dependencies pass a recursive module
            as argument within another recursive module (instead of the returned value).
@@ -287,15 +286,16 @@ execute them when all his dependencies became available.
         <pre class="prettyprint"><code>// https://some.cdn/js/just.js
 window.just = {'Define': function () {}};
 
-&amp;lt;!DOCTYPE html>
-&amp;lt;html data-just-Define='{"main": "/js/main.js"}'>
-&amp;lt;head>
-   &amp;lt;title>Test&lt;/title>
-   &amp;lt;script src='https://some.cdn/js/just.js' async>&lt;/script>
-&amp;lt;/head>
-&amp;lt;body>
-&amp;lt;/body>
-&amp;lt;/html>
+// index.html
+&lt; !DOCTYPE html>
+&lt; html data-just-Define='{"main": "/js/main.js"}'>
+&lt; head>
+   &lt; title>Test&lt;/title>
+   &lt; script src='https://some.cdn/js/just.js' async>&lt;/script>
+&lt; /head>
+&lt; body>
+&lt; /body>
+&lt; /html>
 
 // /js/main.js
 just.configure({

@@ -1736,8 +1736,7 @@
         }
 
         /**
-         * A module loader: it loads files when needed and
-         * execute them when all his dependencies became available.
+         * Define a value after all dependencies became available.
          *
          * &lt;br/>
          * &lt;aside class='note'>
@@ -1749,10 +1748,10 @@
          *             file defines an specific id.&lt;/li>
          *
          *         &lt;li>Urls passed as dependencies are considered ids, so they must
-         *             be defined in {@link just.Define.urls} in order to be loaded.&lt;/li>
+         *             be defined in {@link just.Define.urls} in order to be loaded first.&lt;/li>
          *
          *         &lt;li>&lt;var>require&lt;/var>, &lt;var>module&lt;/var> and &lt;var>exports&lt;/var>
-         *             are not present in this loader.&lt;/li>
+         *             are not present in this loader, but you can emulate them.&lt;/li>
          *
          *         &lt;li>Recursive and circular dependencies pass a recursive module
          *            as argument within another recursive module (instead of the returned value).
@@ -1770,15 +1769,16 @@
          * // https://some.cdn/js/just.js
          * window.just = {'Define': function () {}};
          *
-         * &amp;lt;!DOCTYPE html>
-         * &amp;lt;html data-just-Define='{"main": "/js/main.js"}'>
-         * &amp;lt;head>
-         *    &amp;lt;title>Test&lt;/title>
-         *    &amp;lt;script src='https://some.cdn/js/just.js' async>&lt;/script>
-         * &amp;lt;/head>
-         * &amp;lt;body>
-         * &amp;lt;/body>
-         * &amp;lt;/html>
+         * // index.html
+         * &lt; !DOCTYPE html>
+         * &lt; html data-just-Define='{"main": "/js/main.js"}'>
+         * &lt; head>
+         *    &lt; title>Test&lt;/title>
+         *    &lt; script src='https://some.cdn/js/just.js' async>&lt;/script>
+         * &lt; /head>
+         * &lt; body>
+         * &lt; /body>
+         * &lt; /html>
          *
          * // /js/main.js
          * just.configure({
@@ -1913,7 +1913,7 @@
         /**
          * The initial value for all defined modules.
          *
-         * @property {number}
+         * @type {number}
          * @readOnly
          */
             'STATE_DEFINED': -1,
@@ -1921,21 +1921,21 @@
              * The value for all modules that had been queued
              * prior to be called.
              *
-             * @property {number}
+             * @type {number}
              * @readOnly
              */
             'STATE_NON_CALLED': 0,
             /**
              * The value for all modules that are being called.
              *
-             * @property {number}
+             * @type {number}
              * @readOnly
              */
             'STATE_CALLING': 1,
             /**
              * The value for all modules that were called.
              *
-             * @property {number}
+             * @type {number}
              * @readOnly
              */
             'STATE_CALLED': 2,
@@ -1943,9 +1943,12 @@
              * A list of urls that will be used (instead of ids) to load
              * files before defining globals or non-script values.&lt;br/>
              *
-             * If you need to load files when you require some id,
-             * you need to specify those urls here. If you do so, you
-             * must {@link just.Define|Define} that id/url within that file.
+             * &lt;aside class='note'>
+             *     &lt;h3>Note:&lt;/h3>
+             *     &lt;p>If you need to load files when you require some id,
+             *        you need to specify those urls here. If you do so, you
+             *        must {@link just.Define|Define} that id/url within that file.&lt;/p>
+             * &lt;/aside>
              *
              * @example
              * // js/b.js
@@ -1972,7 +1975,7 @@
              *     // Will load js/index.js once.
              * });
              *
-             * @property {!object.&lt;just.Define~id, url>}
+             * @type {!object.&lt;just.Define~id, url>}
              */
             'urls': {
                 'value': {},
@@ -1984,8 +1987,11 @@
              * check for file contents when loads a new file, you must add
              * the value here.&lt;/br>
              *
-             * Note: If a module is defined with the same id, the module will take
-             * precedence.
+             * &lt;aside class='note'>
+             *     &lt;h3>Note:&lt;/h3>
+             *     &lt;p>If a module is defined with the same id, the module will take
+             *     precedence.&lt;/p>
+             * &lt;/aside>
              *
              * @example
              * Define.nonScripts['/css/index.css'] = function () {};
@@ -1994,7 +2000,7 @@
              *     // but for now, `css` is a function since the id wasn't defined in Define.urls
              * });
              *
-             * @property {!object.&lt;just.Define~id, *>}
+             * @type {!object.&lt;just.Define~id, *>}
              */
             'nonScripts': {
                 'value': {},
@@ -2004,15 +2010,19 @@
              * A writable object literal that contains all the values that
              * will be defined when required.&lt;br/>
              *
-             * Note: If the value for the global is a string, the property
-             * will be accessed from window. I.e.:&lt;br/>
-             * &lt;var>'some.property'&lt;/var> will access to &lt;var>window.some.property&lt;/var>.&lt;br/>
-             *
-             * Note 2: If a module is defined with the same id, the module will take
-             * precedence.
-             *
-             * Note 3: If a non-script is defined with the same id, a non-script value
-             * will take precedence.
+             * &lt;aside class='note'>
+             *     &lt;h3>Notes:&lt;/h3>
+             *     &lt;ul>
+             *         &lt;li>If the value for the global is a string, the property
+             *             will be accessed from window. I.e.:
+             *             &lt;var>'some.property'&lt;/var> will access to &lt;var>window.some.property&lt;/var>.
+             *         &lt;/li>
+             *         &lt;li>If a module is defined with the same id, the module will take
+             *             precedence.&lt;/li>
+             *         &lt;li>If a non-script is defined with the same id, a non-script value
+             *          will take precedence.&lt;/li>
+             *     &lt;/ul>
+             * &lt;/aside>
              *
              * @example
              * // index.js
@@ -2040,7 +2050,7 @@
              *     // just === {Define: 1};
              * });
              *
-             * @property {!object.&lt;just.Define~id, *>}
+             * @type {!object.&lt;just.Define~id, *>}
              */
             'globals': {
                 'value': {},

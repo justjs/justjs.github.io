@@ -1,0 +1,2276 @@
+
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta charset='utf-8'/>
+	<title>Source: core.js - Just js</title>
+	<link type='text/css' rel='stylesheet' href='css/jsdoc-template.css'/>
+	<meta name="viewport" content="width=device-width,
+                        initial-scale=1"/><link rel='shortcut icon' type='image/png' href='/img/favicon-16x16.png'/><link rel='stylesheet' href='../css/jsdoc.css'/>
+</head>
+<body data-gs='{"openPageHeader": "is-page-header-open", "searching": "is-searching"}'>
+	<div id='page-wrapper'>
+		<header id='page-header' data-gs-target='openPageHeader'>
+			
+			<div id='logo'><a href='/'><img src='/img/logo-white-64x64.png' alt='Logo' srcset='/img/logo-white-128x128.png 2x'/></a></div>
+			
+			<nav id='content-nav'>
+				<header>
+					<div id='search'>
+						<div class='textfield-wrapper'>
+							<input type='search' name='q' placeholder='Search...' data-internal-search='#content-nav li a' data-gs-search='searching'/>
+						</div>
+					</div>
+				</header>
+				<h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><abbr title="Namespace">NS</abbr> <a href="just.access.html">access</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.addEventListener.html">addEventListener</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.check.html">check</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defaults.html">defaults</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defineProperties.html">defineProperties</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defineProperty.html">defineProperty</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defProp.html">defProp</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defProps.html">defProps</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.eachProp.html">eachProp</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.eachProperty.html">eachProperty</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.el.html">el</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.emptyObj.html">emptyObj</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.findElements.html">findElements</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.from.html">from</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.getRemoteParent.html">getRemoteParent</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.is.html">is</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.isEmptyObject.html">isEmptyObject</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.isTouchSupported.html">isTouchSupported</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.isWindow.html">isWindow</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.load.html">load</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.loadElement.html">loadElement</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.on.html">on</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.parent.html">parent</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.parseUrl.html">parseUrl</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.prop.html">prop</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.stringToJSON.html">stringToJSON</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.supportsTouch.html">supportsTouch</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toJSON.html">toJSON</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toObj.html">toObj</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toObjectLiteral.html">toObjectLiteral</a></li></ul><h3>Classes</h3><ul><li><abbr title="Class">Cls</abbr> <a href="just.ClassList.html">ClassList</a></li><li><abbr title="Class">Cls</abbr> <a href="just.Def.html">Def</a></li><li><abbr title="Class">Cls</abbr> <a href="just.Define.html">Define</a></li><li><abbr title="Class">Cls</abbr> <a href="just.LocalStorage.html">LocalStorage</a></li></ul><h3>Mixins</h3><ul><li><abbr title="Mixin">Mix</abbr> <a href="just.html">just</a></li></ul><h3>Global</h3><ul><li><abbr title="Global">Glo</abbr> <a href="global.html#t">t</a></li></ul>
+			</nav>
+		</header>
+		<div id='main-wrapper'>
+			<button id='page-header-opener' title='Toggle left bar' class='has-icon' data-css-icon='menu' type='button' data-gs-toggle='openPageHeader'>Toggle left bar</button>
+			<main id='content'>
+				<header>
+					<h1 id='content-title'>Source: core.js</h1>
+				</header>
+				
+
+
+
+    
+    <figure class='source-code-wrapper'>
+        <pre class="prettyprint source linenums"><code>/**
+ * @license
+ * BSD 3-Clause License
+ *
+ * Copyright (c) 2019, Alexis Puga Ruíz
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of the copyright holder nor the names of its
+ *    contributors may be used to endorse or promote products derived from
+ *    this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/**
+ * @preserve Copyright 2019 Alexis Puga Ruíz.
+ * @file Just js: The core for all your javascript proyects.
+ * @version 1.0.0-rc.20
+ */
+(function (fn) {
+
+    if (typeof define === 'function' &amp;&amp; define.amd) { define('just', [], fn); }
+    else if (typeof module === 'object' &amp;&amp; module.exports) { module.exports = fn(); }
+    else { this.just = fn(); }
+
+}).call(this, function () {
+
+    /* eslint-disable */
+	/**
+	 * Non-compliant polyfills for common ES6+ functions, written in ES5:
+	 * Object.assign, Object.values, DOMTokenList.prototype.replace.
+	 */
+	(function(){var O=Object;function fp(c,p,f){var o=c[p]=c[p]||f;f===o&amp;&amp;(o.justPolyfill=!0)}function fy(o){return o.prototype}fp(O,'assign',function(o){var a=arguments,i=a.length,k,v;o=Object(o);while(--i>=1){v=a[i];for(k in v){if(({}).hasOwnProperty.call(v,k)){o[k]=v[k]}}}return o});fp(O,'values',function(o){var r=[],k;for(k in o){({}).hasOwnProperty.call(o,k)&amp;&amp;r.push(o[k])}return r});if(typeof window!=='undefined'){fp(fy(DOMTokenList),'replace',function(a,b){var t=this;return b.trim()&amp;&amp;t.contains(a)&amp;&amp;(t.remove(a),t.add(b),!0)})}})();
+	/* eslint-enable */
+
+    /* eslint-disable no-unused-vars */
+
+    /**
+     * An absolute, relative or blob url.
+     *
+     * @typedef {string} url
+     * @global
+     */
+
+    /**
+     * The full parts of an url.
+     *
+     * @typedef {Object} url_parts
+     * @property {string} protocol - A protocol (including ":", like "ftp:") or ":".
+     * @property {string} href - An absolute url (like "ftp://username:password@www.example.com:80/a?b=1#c").
+     * @property {string} host - The host (like "www.example.com:80") or an empty string.
+     * @property {string} hostname - A hostname (like "www.example.com").
+     * @property {string} port - The GIVEN port as a number (like "80") or an empty string.
+     * @property {string} pathname - A pathname (like "/a").
+     * @property {string} origin - The origin (like "ftp://www.example.com").
+     * @property {string} search - The query arguments (including "?", like "?b=1") or an empty string.
+     * @property {string} hash - The hash (including '#', like "#c") or an empty string.
+     * @property {string} username - The given username or an empty string.
+     * @property {string} password - The given password or an empty string.
+     */
+
+    /**
+     * Same as the second param for &lt;var>Object.defineProperties&lt;/var>
+     *
+     * @typedef {!object} propertiesDescriptor
+     * @global
+     */
+
+    /**
+     * Same as the third param for &lt;var>Object.defineProperty&lt;/var>
+     *
+     * @typedef {!object} propertyDescriptor
+     * @global
+     */
+
+    /**
+     * A tagName of an Element (such as "link").
+     *
+     * @typedef {string} element_tag
+     */
+
+    /**
+     * @mixin just
+     * @global
+     */
+    var just = {};
+    /**
+     * Register non-writable, non-enumerable and non-configurable members on Just.
+     * @package
+     */
+    var set = function registerMember (name, value) { Object.defineProperty(just, name, {'value': value}); };
+
+    set('register', set);
+
+    /**
+     * The given object (if &lt;var>mutate&lt;/var> evals to `true`)
+     * or a copy of each own property of the given object.
+     *
+     * @typedef {!object} just.access~handler_this
+     */
+
+    /**
+     * A function to call when {@link just.access} reaches the deep property of an object.
+     *
+     * @typedef {function} just.access~handler
+     * @this just.access~handler_this
+     * @param {!object} lastObject - The object containing the &lt;var>lastKey&lt;/var>.
+     * @param {string} lastKey - The last value given in &lt;var>path&lt;/var>.
+     * @param {boolean} hasProperty - `false` if some key of &lt;var>path&lt;/var>
+     *     was created, `true` otherwise.
+     * @param {string[]} path - The given keys.
+     * @return {*} The return value for {@link just.access|the main function}.
+     */
+
+    /**
+     * Accesses to a deep property in a new &lt;var>object&lt;/var>
+     * (or &lt;var>object&lt;/var> if &lt;var>mutate&lt;/var> evals to `true`).
+     *
+     * @namespace
+     * @memberof just
+     * @param {!object} object - The base object.
+     * @param {string[]} [path=[path]] - The ordered keys.
+     * @param {just.access~handler} [handler=returnValue] - A custom function.
+     * @param {object} opts
+     * @param {boolean} [opts.mutate=false] - If `true`, it will use
+     *     the given object as the base object, otherwise it will
+     *     copy all the owned properties to a new object.
+     * @param {boolean} [opts.override=true] - If `true`, and the
+     *     current value is different to `null` or `undefined`,
+     *     the function will throw a TypeError.
+     *     If `false`, the current value will be overriden by
+     *     an empty object if it's not an object nor `undefined`.
+     *
+     * @throws {TypeError} If some property causes access problems.
+     *
+     * @example &lt;caption>Accessing to some existent property&lt;/caption>
+     * access({a: {b: {c: {d: 4}}}}, ['a', 'b', 'c', 'd'], function (currentObject, currentKey, hasProperty, path) {
+     *     return hasProperty ? currentObject[currentKey] : null;
+     * }); // returns 4.
+     *
+     * @example &lt;caption>Accessing to some property with a non-JSON-like-object as a value&lt;/caption>
+     * access({a: 1}, ['a', 'b', 'c']); // throws TypeError.
+     * access({a: 1}, ['a', 'b', 'c'], null, {
+     *     'override': true
+     * }); // returns undefined.
+     * // Doesn't throw because it replaces `1` with an empty object
+     * // and keeps accessing to the next properties.
+     *
+     * @example &lt;caption>Accessing to some non-existent property&lt;/caption>
+     * var obj = {z: 1, prototype: [...]};
+     * var newObj = access(obj, 'a.b.c'.split('.'), function (currentObject, currentKey, hasProperty, path) {
+     *
+     *     if (!hasProperty) {
+     *         currentObject[currentKey] = path.length;
+     *     }
+     *
+     *     // At this point:
+     *     //     `obj` is {z: 1},
+     *     //     `currentObject` has a value in `currentKey`,
+     *     //     and `this` has all the added keys (even the ones modified in `currentObject`).
+     *     return this;
+     *
+     * }); // returns {z: 1, a: {b: {c: 3}}}
+     *
+     * // if you want the prototype chain of obj, just copy it.
+     * Object.assign(newObj.prototype, obj.prototype);
+     *
+     * @example &lt;caption>Modifying the base object&lt;/caption>
+     * var obj = {a: {b: false}, b: {b: false}, prototype: [...]};
+     *
+     * access(obj, 'a.b'.split('.'), function (currentObject, currentKey, hasProperty, path) {
+     *     currentObject[currentKey] = 2;
+     * }, true);
+     *
+     * // now `obj` is {a: {a: true}, b: {b: true}, prototype: [...]}.
+     *
+     * @return {*} If &lt;var>handler&lt;/var> is given: the returned value of that function,
+     *         otherwise: the last value of &lt;var>path&lt;/var> in the copied object.
+     */
+    function access (object, path, handler, opts) {
+
+        var options = Object.assign({
+            'override': true,
+            'mutate': false
+        }, opts);
+        var properties = (Array.isArray(path)
+        ? path
+        : [path]
+        );
+        var initialObject = (options.mutate
+        ? object
+        : Object.assign({}, object)
+        );
+        var currentObject = initialObject;
+        var isNewProperty = false;
+        var lastKey = properties[properties.length - 1];
+        var hasProperty;
+
+        properties.slice(0, -1).forEach(function (key, i) {
+
+            var value = currentObject[key];
+
+            if (!(value instanceof Object)) {
+
+                if (typeof value !== 'undefined' &amp;&amp; value !== null &amp;&amp; !options.override) {
+
+                    throw new TypeError(key + ' is not an object.');
+
+                }
+
+                isNewProperty = true;
+                currentObject[key] = value = {};
+
+            }
+
+            currentObject = value;
+
+        });
+
+        hasProperty = lastKey in currentObject &amp;&amp; !isNewProperty;
+
+        return (handler
+        ? handler.call(initialObject, currentObject, lastKey, hasProperty, properties)
+        : currentObject[lastKey]
+        );
+
+    }
+
+    set('access', access);
+
+    /**
+     * @mixin just
+     * @borrows just.access as prop
+     */
+    var prop = access;
+
+    set('prop', prop);
+
+    /**
+     * Checks if &lt;var>value&lt;/var> looks like the other values.
+     *
+     * @namespace
+     * @memberof just
+     * @param {*} value - Comparison value.
+     * @param {...*} [otherValues] - Values to check against.
+     *
+     * @example
+     * check(null, {}, "null", []); // false. Neither is `null`.
+     * check({}, [], {}); // true. {} is {}.
+     *
+     * @return {boolean} `true` if some other value looks like &lt;var>value&lt;/var>.
+     */
+    function check (value, otherValues) {
+
+        return [].slice.call(arguments, 1).some(function (otherValue, i) {
+
+            if ([value, otherValue].some(function (v) { return v === null || v === void 0; })) {
+
+                return otherValue === value;
+
+            }
+
+            return value.constructor === otherValue.constructor;
+
+        });
+
+    }
+
+    defineProperties(check, /** @lends just.check */{
+
+        /**
+         * A custom message to throw.
+         *
+         * @typedef {string} just.check~throwable_message
+         */
+
+        /**
+         * A function that {@link just.check|checks} a value against others and
+         * throws if the result is `false`.
+         *
+         * @function
+         * @this just.check~throwable_message
+         * @param {*} value - Comparison value.
+         * @param {...*} [otherValues] - Values to check against.
+         *
+         * @throws {TypeError} If &lt;var>check&lt;/var> returns `false`.
+         * @returns {value} &lt;var>value&lt;/var> if &lt;var>check&lt;/var> returns `true`.
+         */
+        'throwable': function (value, otherValues) {
+
+            var args = [].slice.call(arguments);
+            var throwableMessage = this;
+
+            if (!check.apply(this, args)) {
+
+                if (!(throwableMessage instanceof String)) {
+
+                    throwableMessage = (value
+                    + ' must be like one of the following values: '
+                    + args.slice(1).map(function (v) { return v + ''; }).join(', ')
+                    );
+
+                }
+
+                throw new TypeError(throwableMessage);
+
+            }
+
+            return value;
+
+        }
+
+    });
+
+    set('check', check);
+
+    /**
+     * @mixin just
+     * @borrows just.check as is
+     */
+    var is = check;
+
+    set('is', is);
+
+    /**
+     * Chainable methods for the classList property.
+     *
+     * @namespace
+     * @memberof just
+     *
+     * @constructor
+     * @param {Element} element - The target.
+     *
+     * @example
+     * let force;
+     *
+     * ClassList(button)
+     *     .add('a', 'b', 'c')
+     *     .remove('b')
+     *     .toggle('c', (force = true))
+     *     .replace('a', 'z')
+     *     .contains('b'); // false
+     */
+    function ClassList (element) {
+
+        if (!(this instanceof ClassList)) { return new ClassList(element); }
+
+        defineProperties(this, /** @lends just.ClassList# */{
+        /** @member {!Element} */
+            'element': element
+        });
+
+    }
+
+    defineProperties(ClassList, /** @lends just.ClassList */{
+
+        /**
+         * Simulate Element.classList.prototype.method.apply(element, args)
+         * since it's not possible to call a classList-method that way.
+         *
+         * @param {Element} element - The target.
+         * @param {string} methodName - The name of the classList method to call.
+         * @param {array[]|*} [methodArgs=[methodArgs]] - Arguments for the classList method.
+         * @return Whatever the method returns.
+         *
+         * @example
+         * ClassList.apply(this, 'add', ['x', 'b']); // > undefined
+         * ClassList.apply(this, 'remove', 'c'); // > undefined
+         * ClassList.apply(this, 'toggle', ['a', true]); // > true
+         */
+        'apply': function (element, methodName, methodArgs) {
+
+            var args = (typeof methodArgs === 'number'
+            ? [methodArgs]
+            : [].slice.call(methodArgs)
+            );
+            var classList = element.classList;
+
+            if (/(?:add|remove)/.test(methodName)) {
+
+                args.forEach(function (arg) { classList[methodName](arg); });
+
+                /** These methods return undefined. */
+                return void 0;
+
+            }
+
+            /*
+             * Passing undefined arguments instead of manually
+             * adding more conditionals to call the method with
+             * the correct amount shouldn't be a problem.
+             *
+             * I.e:
+             * classList.contains('a', undefined);
+             * classList.contains('a', 'some other value');
+             *
+             * Should be the same as calling...
+             * classList.contains('a');
+             */
+            return classList[methodName](args[0], args[1]);
+
+        }
+
+    });
+
+    defineProperties(ClassList.prototype, /** @lends just.ClassList.prototype */{
+
+        /**
+         * @alias Element.classList.add
+         * @chainable
+         */
+        'add': function () {
+
+            ClassList.apply(this.element, 'add', arguments);
+
+            return this;
+
+        },
+        /**
+         * @alias Element.classList.remove
+         * @chainable
+         */
+        'remove': function () {
+
+            ClassList.apply(this.element, 'remove', arguments);
+
+            return this;
+
+        },
+        /**
+         * @alias Element.classList.toggle
+         * @chainable
+         */
+        'toggle': function () {
+
+            ClassList.apply(this.element, 'toggle', arguments);
+
+            return this;
+
+        },
+        /**
+         * @alias Element.classList.replace
+         * @chainable
+         */
+        'replace': function () {
+
+            ClassList.apply(this.element, 'replace', arguments);
+
+            return this;
+
+        },
+        /**
+         * @alias Element.classList.contains
+         * @return {boolean}
+         */
+        'contains': function () { return ClassList.apply(this.element, 'contains', arguments); },
+        /**
+         * @alias Element.classList.item
+         * @return {?string}
+         */
+        'item': function () { return ClassList.apply(this.element, 'item', arguments); }
+
+    });
+
+    set('ClassList', ClassList);
+
+    /**
+     * Defaults to &lt;var>defaultValue&lt;/var> if &lt;var>value&lt;/var> looks like
+     * &lt;var>defaultValue&lt;/var>.
+     *
+     * @namespace
+     * @memberof just
+     * @param {*} value - Any value.
+     * @param {*} [defaultValue] - A value with a desired type for &lt;var>value&lt;/var>.
+     *     If an object literal is given, all the keys of &lt;var>value&lt;/var> will &lt;var>default&lt;/var>
+     *     to his corresponding key in this object.
+     * @param {object} opts - Some options.
+     * @param {boolean} [opts.ignoreDefaultKeys=false] - If `false` and &lt;var>defaultValue&lt;/var>
+     *     is an object literal, the default keys will be added to &lt;var>value&lt;/var>
+     *     or checked against this function for each repeated key.
+     * @param {boolean} [opts.checkLooks=true]
+     *     If `true`:
+     *         `[]` will match ONLY with another Array.
+     *         `{}` will match ONLY with another object literal.
+     *     If `false`
+     *         `[]` and `{}` will match with any other object.
+     * @param {boolean} [opts.checkDeepLooks=true]
+     *     Same as &lt;var>checkLooks&lt;/var> but it works with the inner values
+     *     of the objects.
+     * @param {boolean} [opts.ignoreNull=false]
+     *     If `true`, &lt;var>defaultValue&lt;/var>s with null as a value won't be checked
+     *     and any &lt;var>value&lt;/var> (except `undefined`) will be allowed.
+     *
+     * @example
+     * defaults([1, 2], {a: 1}); // {a: 1}
+     *
+     * @example
+     * defaults({}, null); // null: null is not an object literal.
+     * defaults([], null, {'checkLooks': false}); // []: null is an object.
+     * defaults(null, {}); // {}: null is not an object literal.
+     * defaults(null, []); // []: null is not an Array.
+     *
+     * @example
+     * defaults(1, NaN); // 1 (NaN is an instance of a Number)
+     *
+     * @example
+     * defaults({'a': 1, 'b': 2}, {'a': 'some string'}, {'ignoreDefaultKeys': false}); // {'a': 'some string', 'b': 2}
+     *
+     * @example
+     * defaults({'a': 1}, {'b': 2}, {'ignoreDefaultKeys': false}); // {'a': 1, 'b': 2}
+     * defaults({'a': 1}, {'b': 2}, {'ignoreDefaultKeys': true}); // {'a': 1}
+     *
+     * @example
+     * defaults(1, null, {'ignoreNull': false}) // null (1 is not an object)
+     * defaults(1, null, {'ignoreNull': true}) // 1
+     * defaults(undefined, null, {'ignoreNull': true}) // null
+     * defaults({a: 1}, {a: null}, {'ignoreNull': true}) // {a: 1}
+     *
+     * @returns {value} &lt;var>value&lt;/var> if it looks like &lt;var>defaultValue&lt;/var> or &lt;var>defaultValue&lt;/var> otherwise.
+     */
+    function defaults (value, defaultValue, opts) {
+
+        var options = Object.assign({
+            'ignoreDefaultKeys': false,
+            'checkLooks': true,
+            'checkDeepLooks': true,
+            'ignoreNull': false
+        }, opts);
+
+        if (options.ignoreNull &amp;&amp; defaultValue === null &amp;&amp; value !== void 0) { return value; }
+
+        if (options.checkLooks) {
+
+            if (!check(value, defaultValue)) { return defaultValue; }
+
+            if (check(value, {}) &amp;&amp; options.checkDeepLooks) {
+
+                eachProperty(defaultValue, function (v, k) {
+
+                    if (typeof value[k] !== 'undefined') {
+
+                        value[k] = defaults(value[k], v, options);
+
+                    }
+                    else if (!options.ignoreDefaultKeys) {
+
+                        value[k] = v;
+
+                    }
+
+                });
+
+            }
+
+            return value;
+
+        }
+
+        return (typeof value === typeof defaultValue
+        ? value
+        : defaultValue
+        );
+
+    }
+
+    set('defaults', defaults);
+
+    /**
+     * @mixin just
+     * @borrows just.defaults as from
+     */
+    var from = defaults;
+
+    set('from', from);
+
+    /**
+     * Alternative to &lt;var>Object.defineProperties&lt;/var>.
+     *
+     * @see {@link defineProperty} for more details.
+     * @namespace
+     * @memberof just
+     * @param {!object} object
+     * @param {!object.&lt;key, propertyDescriptor>|!object.&lt;key, value>} properties
+     * @return &lt;var>object&lt;/var>
+     */
+    function defineProperties (object, properties) {
+
+        eachProperty(properties, function (value, key) {
+
+            defineProperty(object, key, value);
+
+        });
+
+        return object;
+
+    }
+
+    set('defineProperties', defineProperties);
+
+    /**
+     * @mixin just
+     * @borrows just.defineProperties as defProps
+     */
+    var defProps = defineProperties;
+
+    set('defProps', defProps);
+
+    /**
+     * Alternative to &lt;var>Object.defineProperty&lt;/var> with more enhancements.
+     *
+     * If &lt;var>object&lt;/var> contains any other key that's not a valid attribute for a
+     * {@link propertyDescriptor|property descriptor} the value WON'T be used
+     * as a property descriptor. I.e:
+     * &lt;code>
+     * defineProperty({}, 'property', {
+     *     value: 1,
+     *     other: 'value'
+     * }).property; // > {value: 1, other: 'value'}
+     * &lt;/code>
+     *
+     * Note: Empty objects will be considered values rather than property descriptors.
+     *
+     * @namespace
+     * @memberof just
+     * @throws &lt;var>Object.defineProperty&lt;/var> exceptions.
+     * @param {!object} object - The target.
+     * @param {string} key - Key for the property.
+     * @param {!object} [value={value}] - A {@link propertyDescriptor} or some value.
+     * @return &lt;var>object&lt;/var>.
+     */
+    function defineProperty (object, key, value) {
+
+        var descriptor = Object(value);
+        var defaultDescriptors = Object.assign(Object.getOwnPropertyDescriptor(Object.defineProperty({}, '_', {}), '_'), {
+            'get': void 0,
+            'set': void 0
+        });
+
+        if (!eachProperty(defaultDescriptors, function (v, key) { return key in descriptor; })) {
+
+            descriptor = {
+                'value': value
+            };
+
+        }
+
+        Object.defineProperty(object, key, descriptor);
+
+        return object;
+
+    }
+
+    set('defineProperty', defineProperty);
+
+    /**
+     * @mixin just
+     * @borrows just.defineProperty as defProp
+     */
+    var defProp = defineProperty;
+
+    set('defProp', defProp);
+
+    /**
+     * @typedef {function} just.eachProperty~fn
+     *
+     * @this {@link just.eachProperty|&lt;var>thisArg&lt;/var> from the main function}.
+     *
+     * @param {*} value - The current value.
+     * @param {*} key - The current key.
+     * @param {!object} object - The current object being iterated.
+     *
+     * @return {boolean} If `true`, the current loop will stop.
+     */
+
+    /**
+     * Converts &lt;var>object&lt;/var> to an Object, iterates over it,
+     * calls a function on each iteration, and if a truthy value
+     * is returned from that function, the loop will stop.
+     *
+     * @namespace
+     * @memberof just
+     * @param {*} object - Some value.
+     * @param {just.eachProperty~fn} fn - The function that will be
+     *     called on each iteration.
+     * @param {*} [thisArg] - &lt;var>this&lt;/var> for &lt;var>fn&lt;/var>.
+     * @param {object} opts - Some options.
+     * @param {boolean} [opts.addNonOwned=false] - Include non-owned properties.
+     *     `false`: iterate only the owned properties.
+     *     `true`: iterate the (enumerable) inherited properties too.
+     *
+     * @throws {TypeError} If &lt;var>fn&lt;/var> is not a function.
+     * @return {boolean} `true` if the function was interrupted, `false` otherwise.
+     */
+    function eachProperty (object, fn, thisArg, opts) {
+
+        var properties = Object(object);
+        var options = Object.assign({
+            'addNonOwned': false
+        }, opts);
+        var wasInterrupted = false;
+        var key;
+
+        if (typeof fn !== 'function') { throw new TypeError(fn + ' is not a function.'); }
+
+        for (key in properties) {
+
+            if (wasInterrupted) { break; }
+
+            if (options.addNonOwned || ({}).hasOwnProperty.call(properties, key)) {
+
+                wasInterrupted = Boolean(fn.call(thisArg, properties[key], key, properties));
+
+            }
+
+        }
+
+        return wasInterrupted;
+
+    }
+
+    set('eachProperty', eachProperty);
+
+    /**
+     * @mixin just
+     * @borrows just.eachProperty as eachProp
+     */
+    var eachProp = eachProperty;
+
+    set('eachProp', eachProp);
+
+    /**
+     * Gets DOM Elements by a CSS Selector and always
+     * returns an array.
+     *
+     * @namespace
+     * @memberof just
+     * @param {DOMString} selector - A CSS selector.
+     * @param {Node} [parent=document] - The parent node.
+     *
+     * @return {!Array} The found elements.
+     */
+    function findElements (selector, parent) {
+
+        return [].slice.call((parent || document).querySelectorAll(selector));
+
+    }
+
+    set('findElements', findElements);
+
+    /**
+     * @mixin just
+     * @borrows just.findElements as el
+     */
+    var el = findElements;
+
+    set('el', el);
+
+    /**
+     * A function that checks if &lt;var>this&lt;/var> is the Node that you're looking for.
+     *
+     * @typedef {function} just.getRemoteParent~fn
+     *
+     * @this Node
+     * @param {!Number} deepLevel - A counter that indicates how many elements have checked.
+     * @param {Node} rootContainer - The root container.
+     *
+     * @return {boolean}
+     */
+
+    /**
+     * Goes up through the &lt;var>childNode&lt;/var> parents, until &lt;var>fn&lt;/var> returns `true`
+     * or a non-Node is found.
+     *
+     * @namespace
+     * @memberof just
+     * @param {Node} childNode - Some child.
+     * @param {just.getRemoteParent~fn} fn - Some custom handler.
+     * @param {Node} [rootContainer=html] - The farthest parent.
+     * @param {boolean} [includeChild=false] - If `true`, it calls &lt;var>fn&lt;/var> with &lt;var>childNode&lt;/var> too.
+     *
+     * @example
+     * just.getRemoteParent(just.body, function () {
+     *     return this.tagName === 'HTML';
+     * }); // returns the &lt;html> Element.
+     *
+     * @return {Node|null} The current Node when &lt;var>fn&lt;/var> returns `true`.
+     */
+    function getRemoteParent (childNode, fn, rootContainer, includeChild) {
+
+        var currentNode = childNode;
+        var deepLevel = 0;
+
+        if (typeof fn !== 'function') { throw new TypeError(fn + ' is not a function.'); }
+        if (!(childNode instanceof Node)) { throw new TypeError('The child isn\'t an instance of a Node.'); }
+        if (!(rootContainer instanceof Node)) { rootContainer = document.documentElement; }
+
+        while (currentNode) {
+
+            if ((deepLevel > 0 || includeChild)
+			&amp;&amp; fn.call(currentNode, deepLevel, rootContainer)) {
+
+                return currentNode;
+
+            }
+
+            if (currentNode === rootContainer) { return null; }
+
+            currentNode = currentNode.parentNode;
+            deepLevel++;
+
+        }
+
+        return null;
+
+    }
+
+    set('getRemoteParent', getRemoteParent);
+
+    /**
+     * @mixin just
+     * @borrows just.access as parent
+     */
+    var parent = getRemoteParent;
+
+    set('parent', parent);
+
+    /**
+     * Checks if an object has no direct keys.
+     *
+     * @namespace
+     * @memberof just
+     * @param {*} [object=Object(object)] - Some object.
+     * @return {boolean} `true` if the object doesn't contain owned properties,
+     *     `false` otherwise.
+     */
+    function isEmptyObject (object) {
+
+        return !eachProperty(object, function () { return true; });
+
+    }
+
+    set('isEmptyObject', isEmptyObject);
+
+    /**
+     * @mixin just
+     * @borrows just.isEmptyObject as emptyObj
+     */
+    var emptyObj = isEmptyObject;
+
+    set('emptyObj', emptyObj);
+
+    /* global DocumentTouch */
+    /**
+     * Checks if the screen &lt;em>supports&lt;/em> touch.
+     *
+     * @namespace
+     * @memberof just
+     * @return {boolean}
+     */
+    function isTouchSupported () {
+
+        return Boolean('ontouchstart' in document.body
+		|| window.navigator.maxTouchPoints > 0
+		|| window.navigator.msMaxTouchPoints > 0
+		|| 'DocumentTouch' in window
+		&amp;&amp; document instanceof DocumentTouch
+        );
+
+    }
+
+    set('isTouchSupported', isTouchSupported);
+
+    /**
+     * @mixin just
+     * @borrows just.isTouchSupported as supportsTouch
+     */
+    var supportsTouch = isTouchSupported;
+
+    set('supportsTouch', supportsTouch);
+
+    /**
+     * Checks if an object is the window global by checking &lt;var>window&lt;/var> or
+     * some common properties of &lt;var>window&lt;/var>.
+     *
+     * @namespace
+     * @memberof just
+     * @param {*} object - Some object.
+     * @return {boolean} `true` if &lt;var>object&lt;/var> is &lt;var>window&lt;/var> or contains the common properties,
+     *     `false` otherwise.
+     */
+    function isWindow (object) {
+
+        return Boolean(object === window
+		|| object instanceof Object
+		&amp;&amp; object.document
+		&amp;&amp; object.setInterval
+        );
+
+    }
+
+    set('isWindow', isWindow);
+
+    /**
+     * A listener for the "onload" or "onerror" events.
+     *
+     * @typedef {function} just.loadElement~listener
+     *
+     * @this Element
+     * @param {!Event} event - The triggered event.
+     * @return {*}
+     */
+
+    /**
+     * A custom function to append the created element.
+     *
+     * @typedef {function} just.loadElement~handler
+     * @this {!Element} - The element that loads the url.
+     * @param {?Element} loadedElement - An identical element that has been loaded previously.
+     * @param {url} url - The given url to load.
+     *
+     * @return {*} Some value.
+     */
+
+    /**
+     * Loads an external file if no other similar element is
+     * found.
+     *
+     * @namespace
+     * @memberof just
+     * @throws document.createElement exception or TypeError if &lt;var>url&lt;/var> is missing.
+     * @param {!element_tag} tag - A tag name.
+     * @param {!url} url - The url of the file.
+     * @param {just.loadElement~handler} [handler]
+     *     If it's a function: it will be triggered
+     *     (without appending the element),
+     *     otherwise: the element will be appended to
+     *     {@link just.head|head}.
+     * @param  {just.loadElement~listener} [listener] - A function to trigger after
+     *     the element is appended.
+     *
+     * @return {*} The return of the {@link just.loadElement~handler|handler}.
+     */
+    function loadElement (tag, url, listener, handler) {
+
+        var attribute = loadElement.nonSrcAttributes[tag] || 'src';
+        var element = document.createElement(tag);
+        var parsedUrl = parseUrl(url);
+        var selectors = [url, parsedUrl.href].map(function (url) { return tag + '[' + attribute + '="' + url + '"]'; });
+        var similarElement = findElements(selectors.join(','))[0] || null;
+        var isValidUrl = typeof url === 'string' &amp;&amp; url.trim() !== '';
+        var isLinkElement;
+        var isCrossOriginResource;
+
+        if (!isValidUrl) { throw new TypeError(url + ' is not a valid url.'); }
+
+        isLinkElement = element instanceof HTMLLinkElement;
+        isCrossOriginResource = parsedUrl.origin !== window.location.origin
+        &amp;&amp; ['video', 'img', 'script', 'link'].indexOf(tag) >= 0;
+
+        if (isLinkElement) { element.rel = 'stylesheet'; }
+        if (isCrossOriginResource) { element.crossOrigin = 'anonymous'; }
+
+        if (typeof listener === 'function') {
+
+            element.onerror = element.onload = function (e) {
+
+                this.onload = this.onerror = null;
+
+                return listener.call(this, e);
+
+            };
+
+        }
+
+        element[attribute] = url;
+
+        if (typeof handler === 'function') { return handler.call(element, similarElement, url); }
+        if (!similarElement) { document.head.appendChild(element); }
+
+        return this;
+
+    }
+
+    defineProperties(loadElement, /** @lends just.loadElement */{
+
+        /**
+         * An src-like attribute for an Element.
+         *
+         * @typedef {string} just.loadElement~srcLikeAttribute
+         */
+
+        /**
+         * {@link element_tag|Element-tags} that are known
+         * for not using 'src' to fetch a url.
+         *
+         * @type {Object.&lt;
+         *     element_tag,
+         *     just.loadElement~srcLikeAttribute
+         * >}
+         */
+        'nonSrcAttributes': {
+            'link': 'href'
+        }
+
+    });
+
+    set('loadElement', loadElement);
+
+    /**
+     * @mixin just
+     * @borrows just.loadElement as load
+     */
+    var load = loadElement;
+
+    set('load', load);
+
+    /**
+     * A mixin of properties that access to some kind of storage
+     * in the browser.
+     *
+     * @class
+     * @memberof just
+     * @param {boolean} [consent=false] - A boolean indicating that
+     *     the user allowed the access to some kind of local storage.
+     * @param {boolean} [isExplicit=typeof consent !== 'undefined'] -
+     *     A value to indicate if the given consent was specified by the
+     *     user.
+     */
+    function LocalStorage (consent, isExplicit) {
+
+        if (!(this instanceof LocalStorage)) { return new LocalStorage(consent, isExplicit); }
+
+        defineProperties(this, {
+            'consent': Boolean(consent),
+            'isExplicit': defaults(isExplicit, typeof consent !== 'undefined')
+        });
+
+    }
+
+    defineProperties(LocalStorage, /** @lends just.LocalStorage */{
+
+        /**
+         * The DoNotTrack header formatted as `true`, `false` or `undefined`
+         * (for "unspecified").
+         *
+         * @static
+         * @type {boolean|undefined}
+         */
+        'DNT': {
+            'get': function DNT () {
+
+                var dnt = [navigator.doNotTrack, navigator.msDoNotTrack, window.doNotTrack];
+                var consent = ',' + dnt + ',';
+
+                return (/,(yes|1),/i.test(consent)
+                ? true
+                : /,(no|0),/i.test(consent)
+                ? false
+                : void 0
+                );
+
+            }
+        },
+
+        /**
+         * Checks if &lt;var>cookie&lt;/var> is in &lt;var>document.cookie&lt;/var>.
+         *
+         * @function
+         * @static
+         * @param {string} cookie - The name of the cookie or the cookie itself.
+         *
+         * @example
+         * document.cookie += 'a=b; c=d;';
+         * cookieExists('a'); // true
+         * cookieExists('b'); // false
+         * cookieExists('a=b'); // true
+         * cookieExists('a=d'); // false
+         *
+         * @return {boolean} `true` if it exists, `false` otherwise.
+         * @readOnly
+         */
+        'cookieExists': function cookieExists (cookie) {
+
+            return new RegExp('; ' + cookie + '(=|;)').test('; ' + document.cookie + ';');
+
+        },
+
+        /**
+         * Returns a cookie from &lt;var>document.cookie&lt;/var>.
+         *
+         * @function
+         * @static
+         * @param {string} name - The cookie name.
+         *
+         * @return {string|null} The cookie if it exists or null.
+         * @readOnly
+         */
+        'getCookie': function getCookie (name) {
+
+            return (!/=/.test(name) &amp;&amp; LocalStorage.cookieExists(name)
+            ? ('; ' + document.cookie).split('; ' + name + '=').pop().split(';')[0]
+            : null
+            );
+
+        }
+    });
+
+    defineProperties(LocalStorage.prototype, /** @lends just.LocalStorage.prototype */{
+
+        /**
+         * Concatenates a value to &lt;var>document.cookie&lt;/var>.
+         *
+         * @function
+         * @param {string} name - The name of the cookie.
+         * @param {string} value - The value of the cookie.
+         * @param {!object} [opts] - Cookie options.
+         * @param {string} [opts.secure=location.protocol === 'https:'] - "secure" flag for the cookie.
+         *
+         * @return {boolean} `true` if was set, `false` otherwise.
+         * @readOnly
+         */
+        'setCookie': function setCookie (name, value, opts) {
+
+            var cookie = '';
+            var set = function (k, v) { cookie += k + (typeof v !== 'undefined' ? '=' + v : '') + '; '; };
+            var options = defaults(opts, {
+                'secure': location.protocol === 'https:'
+            });
+
+            if (!this.consent) { return false; }
+
+            if (options.secure) { set('secure'); }
+            delete options.secure;
+
+            if (options.expires) { options.expires = new Date(options.expires).toGMTString(); }
+
+            set(name, value);
+            eachProperty(options, function (v, k) { set(k, v); });
+
+            document.cookie = cookie.trim();
+
+            return true;
+
+        },
+
+        /**
+         * Overrides a cookie by setting an empty value and expiring it.
+         *
+         * @function
+         * @param {string} name - The name of the cookie.
+         * @param {object} [opts] - Some extra options.
+         * @param {Date} [opts.expires=new Date(0)] - A date in the past.
+         *
+         * @return {boolean} `true` if was overriden or the cookie
+         *     does not exist, `false` otherwise.
+         */
+        'removeCookie': function removeCookie (name, opts) {
+
+            var options = defaults(opts, {
+                'expires': new Date(0)
+            });
+
+            if (!LocalStorage.cookieExists(name)) { return true; }
+
+            return this.setCookie(name, '', options);
+
+        },
+
+        /**
+         * Any of "cookie", "localStorage", "sessionStorage"...
+         *
+         * @typedef {string} just.LocalStorage~isStorageAvailable_type
+         */
+
+        /**
+         * Tests if the specified storage does not throw.
+         *
+         * @function
+         * @param {just.LocalStorage~isStorageAvailable_type} type
+         *     A type of storage.
+         * @param {string} [tempKey='_'] - Storage will save this key with &lt;var>tempValue&lt;/var> as a value.
+         * @param {string} [tempValue='_'] - Storage will save this value with &lt;var>tempKey&lt;/var> as a key.
+         *
+         * @return {boolean} `true` if the function does not throw
+         *     and is allowed by the user, `false` otherwise.
+         */
+        'isStorageAvailable': function isStorageAvailable (type, tempKey, tempValue) {
+
+            var k = defaults(tempKey, '_');
+            var v = defaults(tempValue, '_');
+            var storage;
+
+            if (!this.consent) { return false; }
+
+            if (/cookie/i.test(type)) {
+
+                return this.setCookie(k, v)
+                &amp;&amp; LocalStorage.getCookie(k) === v
+                &amp;&amp; this.removeCookie(k);
+
+            }
+
+            try {
+
+                storage = window[type];
+                storage.setItem(k, v);
+                storage.removeItem(k);
+
+            }
+            catch (exception) {
+
+                try { storage.removeItem(k); }
+                catch (wrongImplementation) { return false; }
+
+                return false;
+
+            }
+
+            /* istanbul ignore next */
+            return true;
+
+        }
+    });
+
+    set('LocalStorage', LocalStorage);
+
+    /**
+     * Add an event listener to multiple elements.
+     *
+     * @namespace
+     * @memberof just
+     * @param {string|Element[]} elements - The targets.
+     * @param {string|string[]} eventNames - The event types.
+     * @param {function} listener - The handler for the event.
+     * @param {object|boolean} [options=false] - Options for addEventListener
+     * @return {Element[]} elements
+     */
+    function addEventListener (elements, eventNames, listener, options) {
+
+        if (typeof elements === 'string') { elements = findElements(elements); }
+        if (!Array.isArray(eventNames)) { eventNames = [eventNames]; }
+        if (elements &amp;&amp; !('length' in elements)) { elements = [elements]; }
+
+        [].slice.call((elements = elements || [])).forEach(function (element) {
+
+            eventNames.forEach(function (eventName) {
+
+                element.addEventListener(eventName, listener, options || false);
+
+            });
+
+        });
+
+        return elements;
+
+    }
+
+    set('addEventListener', addEventListener);
+
+    /**
+     * @mixin just
+     * @borrows just.addEventListener as on
+     */
+    var on = addEventListener;
+
+    set('on', on);
+
+    /**
+     * Parses &lt;var>url&lt;/var> without checking if it's a valid url.
+     *
+     * Note that this function uses &lt;var>window.location&lt;/var> to make relative urls, so
+     * weird values in there will give weird results.
+     *
+     * @namespace
+     * @memberof just
+     * @param {url} [url=window.location.href] - A relative, an absolute or a blob url.
+     *
+     * @example &lt;caption>An absolute url:&lt;/caption>
+     * parseUrl(window.location.href);
+     *
+     * @example &lt;caption>A relative url:&lt;/caption>
+     * parseUrl('/?a#c?d'); // "/" is the pathname, "?a" the search and "#c?d" the hash.
+     *
+     * @example &lt;caption>A blob url:&lt;/caption>
+     * parseUrl('blob:'); // Same as 'blob:' + `window.location.href`
+     *
+     * @example &lt;caption>Some good-to-know urls:&lt;/caption>
+     * parseUrl(); // Same as `window.location`.
+     * parseUrl('a'); // Something that doesn't start with "/", "?", or "#" is evaluated as a host.
+     * parseUrl('a:b'); // "a:b" is a host, since "b" is not a number.
+     * parseUrl('//'); // evals as the current origin.
+     * parseUrl('blob://'); // Same as 'blob:' + `window.location.origin`.
+     * // [...]
+     *
+     * @return {url_parts}
+     */
+    function parseUrl (url) {
+
+        var parts = {};
+        var loc = window.location;
+        var optionalParts, hrefParts, id, uriParts, domainParts, hostParts,
+            userParts, passwordParts;
+        var blob;
+
+        url = url || loc.href;
+
+        if (/^blob:/i.test(url)) {
+
+            blob = parseUrl(url.replace(/^blob:/i, ''));
+
+            return Object.assign(blob, {
+                'protocol': 'blob:',
+                'href': 'blob:' + blob.href,
+                'host': '',
+                'hostname': '',
+                'port': '',
+                'pathname': blob.origin + blob.pathname
+            });
+
+        }
+
+        if (/^(:)?\/\//.test(url)) {
+
+            url = ((url = url.replace(/^:/, '')) === '//'
+            ? loc.origin
+            : loc.protocol + url
+            );
+
+        }
+        else if (/^(\?|#|\/)/.test(url)) {
+
+            url = loc.origin + url;
+
+        }
+        else if (!/:\/\//.test(url)) {
+
+            url = loc.protocol + '//' + url;
+
+        }
+
+        hrefParts = (url || '').split(/(\?.*#?|#.*\??).*/);
+        optionalParts = (hrefParts[1] || '').split('#');
+        id = optionalParts[1] || '';
+
+        parts.search = optionalParts[0] || '';
+        parts.hash = (id ? '#' + id : id);
+
+        uriParts = (hrefParts[0] || '').split('://');
+
+        hostParts = (uriParts[1] || '').split(/(\/.*)/);
+
+        parts.username = '';
+        parts.password = '';
+
+        if (/@/.test(hostParts[0])) {
+
+            userParts = hostParts[0].split('@');
+            passwordParts = userParts[0].split(':');
+            parts.username = passwordParts[0] || '';
+            parts.password = passwordParts[1] || '';
+            hostParts[0] = userParts[1];
+
+        }
+
+        parts.host = hostParts[0] || '';
+        parts.pathname = hostParts[1] || '';
+
+        domainParts = parts.host.split(/:([0-9]+)/);
+
+        parts.hostname = domainParts[0] || '';
+        parts.port = (typeof domainParts[1] !== 'undefined'
+        ? domainParts[1]
+        : ''
+        );
+
+        parts.protocol = uriParts[0] + ':';
+        parts.origin = parts.protocol + '//' + parts.host;
+
+        parts.href = (userParts
+        ? parts.protocol + '//' + parts.username + ':' + parts.password + '@' + parts.host
+        : parts.origin
+        ) + parts.pathname + parts.search + parts.hash;
+
+        return parts;
+
+    }
+
+    set('parseUrl', parseUrl);
+
+    /**
+     * Parses a JSON string into a JSON.
+     *
+     * @namespace
+     * @memberof just
+     * @param {*} string - Some string to parse.
+     *
+     * @example
+     * stringToJSON('{"a": 1}'); // returns {a: 1}.
+     *
+     * @example
+     * stringToJSON(1); // returns {}.
+     *
+     * @return {!object} A JSON-like object.
+     */
+    function stringToJSON (string) {
+
+        var json;
+
+        if (!/\{.+\}/.test(string)) { return {}; }
+
+        try { json = JSON.parse(string); }
+        catch (exception) { return {}; }
+
+        return json;
+
+    }
+
+    set('stringToJSON', stringToJSON);
+
+    /**
+     * @mixin just
+     * @borrows just.stringToJSON as toJSON
+     */
+    var toJSON = stringToJSON;
+
+    set('toJSON', toJSON);
+
+    /**
+     * Converts &lt;code>[[k0, v0], {k1: v1}]&lt;/code> to &lt;code>{k0: v0, k1: v1}&lt;/code>.
+     *
+     * @namespace
+     * @memberof just
+     * @param {!object[]|!object} array - An array containing sub-arrays
+     *     with object literal pairs, or object literals: &lt;code>[[k, v], {k: v}]&lt;/code>.
+     *
+     * @return {!object} An object literal.
+     */
+    function toObjectLiteral (array) {
+
+        var objectLiteral = {};
+
+        if (check(array, {}, null)) {
+
+            return Object.assign({}, array);
+
+        }
+
+        if (!check(array, [])) {
+
+            throw new TypeError(array + ' must be either null, an object literal or an Array.');
+
+        }
+
+        array.forEach(function (subArray) {
+
+            var key, value;
+
+            if (check(subArray, [])) {
+
+                key = subArray[0];
+                value = subArray[1];
+                this[key] = value;
+
+            }
+            else if (check(subArray, {})) {
+
+                Object.assign(this, subArray);
+
+            }
+            else {
+
+                throw new TypeError(subArray + ' must be either ' +
+				'an object literal or an Array.');
+
+            }
+
+        }, objectLiteral);
+
+        return objectLiteral;
+
+    }
+
+    set('toObjectLiteral', toObjectLiteral);
+
+    /**
+     * @mixin just
+     * @borrows just.toObjectLiteral as toObj
+     */
+    var toObj = toObjectLiteral;
+
+    set('toObj', toObj);
+
+    /**
+     * Call a function when the HTML document has been loaded.
+     * Source: http://youmightnotneedjquery.com/#ready
+     *
+     * @param {function} fn - The callback.
+     */
+    function onDocumentReady (fn) {
+
+        if (document.readyState !== 'loading') { return setTimeout(fn), void 0; }
+
+        document.addEventListener('DOMContentLoaded', function onDocumentReady () {
+
+            document.removeEventListener('DOMContentLoaded', onDocumentReady);
+            fn();
+
+        });
+
+    }
+
+    set('onDocumentReady', onDocumentReady);
+
+    var Define = (function () {
+
+        var modules = {};
+        var defaultErrorHandler = function (exception) { throw exception; };
+        var timeout;
+
+        function defineAlias (id, alias) {
+
+            if (isModuleDefined(alias)) { return false; }
+
+            new Define(alias, [id], function (value) { return value; });
+
+            return true;
+
+        }
+
+        function defineGlobal (id) {
+
+            var global = Define.globals[id];
+            var value = global;
+
+            if (!(id in Define.globals) || isModuleDefined(id)) { return false; }
+            if (typeof global === 'string') { value = function () { return access(window, global.split('.')); }; }
+
+            new Define(id, [], value);
+
+            return true;
+
+        }
+
+        function defineNonScript (id) {
+
+            var nonScript = Define.nonScripts[id];
+            var value = nonScript;
+
+            if (!(id in Define.nonScripts) || isModuleDefined(id)) { return false; }
+
+            new Define(id, [], value);
+
+            return true;
+
+        }
+
+        function defineKnownModule (id, isLoaded) {
+
+            if (isModuleDefined(id)) { return false; }
+
+            if (id in Define.urls &amp;&amp; !isLoaded) { return loadModule(id); }
+            else if (id in Define.nonScripts) { return defineNonScript(id); }
+            else if (id in Define.globals) { return defineGlobal(id); }
+
+            return false;
+
+        }
+
+        function loadModule (id, onLoad) {
+
+            var url = id in Define.urls ? Define.urls[id] : id;
+            var URL = parseUrl(url);
+            var urlExtension = (URL.pathname.match(/\.(.+)$/) || ['js'])[0];
+            var type = (/css$/i.test(urlExtension) ? 'link' : 'script');
+
+            if (!(id in Define.urls)) { Define.urls[id] = url; }
+            if (url !== id) { defineAlias(id, url); }
+
+            return loadElement(type, url, function (e) {
+
+                var isError = Object(e).type === 'error';
+
+                if (!isError) { defineKnownModule(id, true); }
+                if (typeof onLoad === 'function') { return onLoad.call(this, e); }
+                if (isError) { Define.handleError.call(null, new Error('Error loading ' + url)); }
+
+            }, function (similarScript) {
+
+                if (type !== 'script' &amp;&amp; !(id in Define.nonScripts)) { Define.nonScripts[id] = this; }
+                if (similarScript) { return false; }
+
+                document.head.appendChild(this);
+
+                return true;
+
+            });
+
+        }
+
+        function getModule (id) {
+
+            defineKnownModule(id);
+
+            return modules[id] || null;
+
+        }
+
+        function getModules (ids) {
+
+            return ids.map(function (id) { return getModule(id); });
+
+        }
+
+        function wasCalled (module) {
+
+            return Object(module).state === Define.STATE_CALLED;
+
+        }
+
+        function wereCalled (modules) {
+
+            return modules.every(function (module) { return wasCalled(module); });
+
+        }
+
+        function callModule (module) {
+
+            var handler = module.handler;
+            var dependencies = module.dependencies;
+            var errorHandlerResult;
+            var isEveryDependencyWaiting;
+            var args;
+
+            if (wasCalled(module)) { return false; }
+
+            module.state = Define.STATE_NON_CALLED;
+            isEveryDependencyWaiting = dependencies.every(
+                function (d) { return d &amp;&amp; d.state !== Define.STATE_DEFINED; }
+            );
+
+            if (wereCalled(dependencies) || isEveryDependencyWaiting) {
+
+                args = dependencies.map(function (d) { return d.exports; });
+                module.state = Define.STATE_CALLING;
+
+                try { module.exports = handler.apply(module, args); }
+                catch (exception) { errorHandlerResult = Define.handleError.call(module, exception); }
+
+                module.state = Define.STATE_CALLED;
+
+                return (typeof errorHandlerResult === 'boolean'
+                ? errorHandlerResult
+                : true
+                );
+
+            }
+
+            return false;
+
+        }
+
+        function isValidID (id) {
+
+            return typeof id === 'string' &amp;&amp; id.trim() !== '';
+
+        }
+
+        function isModuleDefined (id) {
+
+            return id in modules;
+
+        }
+
+        function isNullOrUndefined (value) {
+
+            return value === null || typeof value === 'undefined';
+
+        }
+
+        /**
+         * Define a value after all dependencies became available.
+         *
+         * &lt;br/>
+         * &lt;aside class='note'>
+         *     &lt;h3>A few things to consider: &lt;/h3>
+         *     &lt;ul>
+         *         &lt;li>This is not intended to be AMD compliant.&lt;/li>
+         *
+         *         &lt;li>This does not check file contents, so it won't check if the
+         *             file defines an specific id.&lt;/li>
+         *
+         *         &lt;li>Urls passed as dependencies are considered ids, so they must
+         *             be defined in {@link just.Define.urls} in order to be loaded first.&lt;/li>
+         *
+         *         &lt;li>&lt;var>require&lt;/var>, &lt;var>module&lt;/var> and &lt;var>exports&lt;/var>
+         *             are not present in this loader, but you can emulate them.&lt;/li>
+         *
+         *         &lt;li>Recursive and circular dependencies pass a recursive module
+         *            as argument within another recursive module (instead of the returned value).
+         *            Please, avoid using them or use them carefully.&lt;/li>
+         *     &lt;/ul>
+         * &lt;/aside>
+         *
+         * @class
+         * @memberof just
+         * @param {?string} id - The module id.
+         * @param {string[]|string} dependencyIDs - Required module ids.
+         * @param {*} value - The module value.
+         *
+         * @example
+         * // https://some.cdn/js/just.js
+         * window.just = {'Define': function () {}};
+         *
+         * // index.html
+         * &lt; !DOCTYPE html>
+         * &lt; html data-just-Define='{"main": "/js/main.js"}'>
+         * &lt; head>
+         *    &lt; title>Test&lt;/title>
+         *    &lt; script src='https://some.cdn/js/just.js' async>&lt;/script>
+         * &lt; /head>
+         * &lt; body>
+         * &lt; /body>
+         * &lt; /html>
+         *
+         * // /js/main.js
+         * just.configure({
+         *    'globals': {
+         *        // Set justJs to window.just
+         *        'justJs': 'just'
+         *    },
+         *    'urls': {
+         *        // Load "/css/index.css" when "index.css" is required.
+         *        'index.css': '/css/index.css'
+         *    },
+         *    'nonScripts': {
+         *        // Call when "main.html" is required.
+         *        'main.html': function () { return '&lt;main>&lt;/main>'; }
+         *    }
+         * });
+         *
+         * // Load when document, justJs and index.css are ready:
+         * just.Define('main', ['justJs', 'index.css'], function (j) {
+         *
+         *    if (j.supportsTouch()) {
+         *        j.Define('mobile', 'https://example/m');
+         *        return;
+         *    }
+         *
+         *    j.Define('non-mobile', ['main.html']);
+         *
+         * });
+         *
+         * // Call only if j.supportsTouch()
+         * just.Define(['mobile'], function (url) {
+         *    window.redirect = url;
+         * });
+         *
+         * // Call when main.html is ready.
+         * just.Define(['non-mobile'], function (html) {
+         *    document.body.innerHTML = html;
+         * });
+         */
+        function Define (id, dependencyIDs, value) {
+
+            if (!arguments.length || typeof value !== 'function' &amp;&amp; [id, dependencyIDs].every(
+                function (value) { return isNullOrUndefined(value); }
+            )) {
+
+                throw new TypeError('Not enough arguments.');
+
+            }
+
+            if (arguments.length === 2) {
+
+                value = arguments[1];
+
+                if (Array.isArray(arguments[0])) {
+
+                    dependencyIDs = arguments[0];
+                    id = void 0;
+
+                }
+                else {
+
+                    dependencyIDs = void 0;
+
+                }
+
+            }
+            else if (arguments.length === 1) {
+
+                if (typeof arguments[0] === 'function') {
+
+                    value = arguments[0];
+                    id = void 0;
+                    dependencyIDs = void 0;
+
+                }
+
+            }
+
+            if (!isValidID(id)) {
+
+                if (isNullOrUndefined(id)) { id = Math.random().toString(); }
+                else { throw new TypeError('The given id (' + id + ') is invalid.'); }
+
+            }
+
+            if (isNullOrUndefined(dependencyIDs)) { dependencyIDs = []; }
+            else if (!Array.isArray(dependencyIDs)) { dependencyIDs = [dependencyIDs]; }
+
+            if (dependencyIDs.some(
+                function (id) { return !isValidID(id); }
+            )) { throw new TypeError('If present, the ids for the dependencies must be valid ids.'); }
+
+            if (!(this instanceof Define)) { return new Define(id, dependencyIDs, value); }
+
+            modules[id] = this;
+
+            defineProperties(this, {
+                'id': id,
+                'handler': (typeof value === 'function'
+                ? value
+                : function () { return value; }
+                ),
+                'dependencyIDs': dependencyIDs,
+                'dependencies': {
+                    'get': function () { return getModules(this.dependencyIDs); }
+                },
+                'state': {
+                    'value': Define.STATE_DEFINED,
+                    'writable': true
+                },
+                'exports': {
+                    'value': (typeof value === 'function' ? this : value),
+                    'writable': true
+                }
+            });
+
+            clearTimeout(timeout);
+
+            timeout = setTimeout(function updateModules () {
+
+                eachProperty(modules, function (module) {
+
+                    if (callModule(module)) { return updateModules(), true; }
+
+                });
+
+            });
+
+        }
+
+        defineProperties(Define, /** @lends just.Define */{
+        /**
+         * The initial value for all defined modules.
+         *
+         * @type {number}
+         * @readOnly
+         */
+            'STATE_DEFINED': -1,
+            /**
+             * The value for all modules that had been queued
+             * prior to be called.
+             *
+             * @type {number}
+             * @readOnly
+             */
+            'STATE_NON_CALLED': 0,
+            /**
+             * The value for all modules that are being called.
+             *
+             * @type {number}
+             * @readOnly
+             */
+            'STATE_CALLING': 1,
+            /**
+             * The value for all modules that were called.
+             *
+             * @type {number}
+             * @readOnly
+             */
+            'STATE_CALLED': 2,
+            /**
+             * A list of urls that will be used (instead of ids) to load
+             * files before defining globals or non-script values.&lt;br/>
+             *
+             * &lt;aside class='note'>
+             *     &lt;h3>Note:&lt;/h3>
+             *     &lt;p>If you need to load files when you require some id,
+             *        you need to specify those urls here. If you do so, you
+             *        must {@link just.Define|Define} that id/url within that file.&lt;/p>
+             * &lt;/aside>
+             *
+             * @example
+             * // js/b.js
+             * Define('b', 1); // or: Define('js/b.js', 1);
+             *
+             * // index.js
+             * Define.urls['b'] = 'js/b.js';
+             * Define('a', ['b'], function (b) {
+             *     // b === 1; > true
+             * });
+             *
+             * @example &lt;caption>Using multiple ids with the same url&lt;/caption>
+             * // js/index.js
+             * Define('foo', 1);
+             * Define('bar', 1);
+             *
+             * // index.js
+             * Object.assign(Define.urls, {
+             *     'foo': 'js/index.js',
+             *     'bar': 'js/index.js'
+             * });
+             *
+             * Define('foo-bar', ['foo', 'bar'], function () {
+             *     // Will load js/index.js once.
+             * });
+             *
+             * @type {!object.&lt;just.Define~id, url>}
+             */
+            'urls': {
+                'value': {},
+                'writable': true
+            },
+            /**
+             * A writable object literal that contains values for non script
+             * resources, like css. Since {@link just.Define|Define} won't
+             * check for file contents when loads a new file, you must add
+             * the value here.&lt;/br>
+             *
+             * &lt;aside class='note'>
+             *     &lt;h3>Note:&lt;/h3>
+             *     &lt;p>If a module is defined with the same id, the module will take
+             *     precedence.&lt;/p>
+             * &lt;/aside>
+             *
+             * @example
+             * Define.nonScripts['/css/index.css'] = function () {};
+             * Define('load css', ['/css/index.css'], function (css) {
+             *     // by default, `css` is an HTMLElement (the link element that loaded the file).
+             *     // but for now, `css` is a function since the id wasn't defined in Define.urls
+             * });
+             *
+             * @type {!object.&lt;just.Define~id, *>}
+             */
+            'nonScripts': {
+                'value': {},
+                'writable': true
+            },
+            /**
+             * A writable object literal that contains all the values that
+             * will be defined when required.&lt;br/>
+             *
+             * &lt;aside class='note'>
+             *     &lt;h3>Notes:&lt;/h3>
+             *     &lt;ul>
+             *         &lt;li>If the value for the global is a string, the property
+             *             will be accessed from window. I.e.:
+             *             &lt;var>'some.property'&lt;/var> will access to &lt;var>window.some.property&lt;/var>.
+             *         &lt;/li>
+             *         &lt;li>If a module is defined with the same id, the module will take
+             *             precedence.&lt;/li>
+             *         &lt;li>If a non-script is defined with the same id, a non-script value
+             *          will take precedence.&lt;/li>
+             *     &lt;/ul>
+             * &lt;/aside>
+             *
+             * @example
+             * // index.js
+             * Define.globals['just'] = 1;
+             * Define('index', ['just'], function (just) {
+             *     // just === 1; > true
+             * });
+             *
+             * @example &lt;caption>Using a string.&lt;/caption>
+             * // index.js
+             * window.just = {Define: 1};
+             * Define.globals['Define'] = 'just.Define';
+             * Define('index', ['Define'], function (Define) {
+             *     // Define === 1; > true
+             * });
+             *
+             * @example &lt;caption>Defining a global after a file load.&lt;/caption>
+             * // https://some.cdn/js/just.js
+             * window.just = {Define: 1};
+             *
+             * // main.js
+             * Define.globals['JustJs'] = 'just';
+             * Define.urls['JustJs'] = 'https://some.cdn/js/just.js';
+             * Define('main', ['JustJs'], function (just) {
+             *     // just === {Define: 1};
+             * });
+             *
+             * @type {!object.&lt;just.Define~id, *>}
+             */
+            'globals': {
+                'value': {},
+                'writable': true
+            },
+            /**
+             * Check if a module is defined.
+             *
+             * @function
+             * @return {boolean}
+             */
+            'isDefined': isModuleDefined,
+            /**
+             * Load a module explicitly.
+             *
+             * @function
+             * @param {url|just.Define~id} id - Some url or an alias defined in {@link just.Define.urls}.
+             * @param {?function} onLoad - Some listener to call when the function loads.
+             */
+            'load': loadModule,
+            /**
+             * Configure any writable option in {@link just.Define} using an object.
+             *
+             * @example
+             * Define.configure({
+             *     'urls': {}, // Same as Define.urls = {}
+             *     'handleError': function () {}, // Same as Define.handleError = function () {}
+             *     'load': 1 // Same as Define.load = 1 > throws Define.load is read-only.
+             * })('id', [], function () {}); // Define afterwards.
+             *
+             * @function
+             * @param {!object} properties - Writable properties from {@link just.Define}.
+             * @chainable
+             */
+            'configure': function (properties) {
+
+                Object.assign(Define, properties);
+
+                return Define;
+
+            },
+            /**
+             * Empty all internal variables and writable properties.
+             *
+             * @function
+             * @chainable
+             */
+            'clear': function () {
+
+                Define.globals = {};
+                Define.nonScripts = {};
+                Define.urls = {};
+                Define.handleError = defaultErrorHandler;
+                Define.clearModules();
+
+                return Define;
+
+            },
+            /**
+             * Remove all modules.
+             *
+             * @function
+             * @chainable
+             */
+            'clearModules': function () { return (modules = {}), this; },
+            /**
+             * Remove some module.
+             *
+             * @function
+             * @param {just.Define~id} id - The id for the module.
+             * @chainable
+             */
+            'clearModule': function (id) { return (delete modules[id]), this; },
+            /**
+             * A function to be called when an async error occur.
+             *
+             * @function
+             * @param {*} exception - Some throwable exception.
+             * @this just.Define
+             * @return {boolean} &lt;var>true&lt;/var> if you want to keep updating modules.
+             */
+            'handleError': {
+                'value': defaultErrorHandler,
+                'writable': true
+            },
+            /**
+             * Finds {@link just.Define.urls|urls} within the document, adds them, and
+             * if some is called "main", it loads it.&lt;br/>
+             *
+             * &lt;aside class='note'>
+             *     &lt;h3>Note&lt;/h3>
+             *     &lt;p>This function is called when the file is loaded.&lt;/p>
+             * &lt;/aside>
+             *
+             * @function
+             * @chainable
+             */
+            'init': function loadUrlsFromDocument () {
+
+                Define.configure({
+                    'urls': Define.findUrlsInDocument('data-just-Define')
+                });
+
+                if ('main' in Define.urls) { Define.load('main'); }
+
+                return Define;
+
+            },
+
+            /**
+             * Finds {@link just.Define.urls|urls} within the document
+             * by selecting all the elements that contain an specific
+             * attribute and parsing that attribute as a JSON.
+             * &lt;br/>
+             * &lt;aside class='note'>
+             *     &lt;h3>Note&lt;/h3>
+             *     &lt;p>Values within brackets will be replaced with
+             *     actual attributes for that element.&lt;/p>
+             *     &lt;p>I.e.: &amp;lt;span a='123' data-urls='{"[a]456": "[a]456"}'&amp;gt;&amp;lt;/span&amp;gt;
+             *     will become: {123456: '123456'}&lt;/p>
+             * &lt;/aside>
+             *
+             * @function
+             * @param {string} attributeName - The attribute which defines the
+             *     {@link just.Define.urls|urls} to be loaded.
+             * @param {Element} [container=document]
+             *
+             * @example
+             * // Considering the following document:
+             * &lt; body>
+             *     &lt; div id='a' data-urls='{"[id]": "link a.css"}'>&lt; /div>
+             *     &lt; script src='b.js' data-urls='{"b": "script [src]"}'>&lt; /script>
+             * &lt; /body>
+             *
+             * // then, in js:
+             * findUrlsInDocument('data-urls');
+             * // Should return {a: 'link a.css', b: 'script b.js'}.
+             *
+             * @return {!just.Define.urls}
+             */
+            'findUrlsInDocument': function (attributeName, container) {
+
+                var urls = {};
+
+                findElements('*[' + attributeName + ']', container).forEach(function (element) {
+
+                    var attribute = element.getAttribute(attributeName) + '';
+                    var urls = stringToJSON(attribute.replace(/\[([^\]]+)\]/ig,
+                        function (_, key) { return element.getAttribute(key); }
+                    ));
+
+                    Object.assign(this, urls);
+
+                }, urls);
+
+                return urls;
+
+            }
+        });
+
+        defineProperties(Define.prototype, /** @lends just.Define# */{
+        /**
+         * Same as {@link Define.load}, but chainable.
+         *
+         * @function
+         * @chainable
+         */
+            'load': function () {
+
+                loadModule.apply(null, [].slice.call(arguments));
+
+                return this;
+
+            }
+        });
+
+        return Define;
+
+    })();
+
+    onDocumentReady(Define.init);
+
+    set('Define', Define);
+
+    /**
+     * @mixin just
+     * @borrows just.Define as Def
+     */
+    var Def = Define;
+
+    set('Def', Def);
+
+
+    set('version', '1.0.0-rc.20'); set('just', just);
+
+    return just;
+
+});
+</code></pre>
+    </figure>
+
+
+
+
+
+			</main>
+			<footer id='page-footer'>
+				<small>Documentation generated by <a href='https://github.com/jsdoc/jsdoc' rel='noreferrer noopener' target='_blank'>JSDoc 3.6.3</a>.</small>
+				<small style='margin-left: 1em;'>Design by <a
+                        href='https://github.com/AlexisPuga'
+                        target='_blank'
+                        rel="noopener noreferrer">Alexis Puga</a>.</small>
+			</footer>
+		</div>
+	</div>
+	<script src='js/jsdoc-template.js' async></script>
+	
+	<script src='js/prettify.min.js' async></script>
+	<link rel='stylesheet' type='text/css' href='css/tomorrow.min.css'/>
+	
+	
+</body>
+</html>

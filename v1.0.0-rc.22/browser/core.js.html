@@ -73,7 +73,7 @@
 /**
  * @preserve Copyright 2019-2020 Alexis Puga and contributors. See {@link https://github.com/justjs/just}.
  * @file Just js: The core for all your javascript proyects.
- * @version 1.0.0-rc.21
+ * @version 1.0.0-rc.22
  */
 (function (fn) {
 
@@ -1681,6 +1681,32 @@
 
         }
 
+        function hasID (id, module) {
+
+            return Object(module).id === id;
+
+        }
+
+        function hasCircularDependencies (module) {
+
+            return module &amp;&amp; module.dependencies.some(
+                hasID.bind(null, module.id)
+            );
+
+        }
+
+        function hasRecursiveDependencies (module) {
+
+            return module &amp;&amp; module.dependencies.some(function (d) {
+
+                return d &amp;&amp; d.dependencies.some(
+                    hasID.bind(null, this.id)
+                );
+
+            }, module);
+
+        }
+
         function callModule (module) {
 
             var handler = module.handler;
@@ -1696,7 +1722,10 @@
                 function (d) { return d &amp;&amp; d.state !== Define.STATE_DEFINED; }
             );
 
-            if (wereCalled(dependencies) || isEveryDependencyWaiting) {
+            if (wereCalled(dependencies) || isEveryDependencyWaiting &amp;&amp; (
+                hasCircularDependencies(module)
+            || hasRecursiveDependencies(module)
+            )) {
 
                 args = dependencies.map(function (d) { return d.exports; });
                 module.state = Define.STATE_CALLING;
@@ -2138,7 +2167,7 @@
             },
             /**
              * Finds {@link just.Define.urls|urls} within the document, adds them, and
-             * if some is called "main", it loads it.&lt;br/>
+             * loads them.&lt;br/>
              *
              * &lt;aside class='note'>
              *     &lt;h3>Note&lt;/h3>
@@ -2154,7 +2183,7 @@
                     'urls': Define.findUrlsInDocument('data-just-Define')
                 });
 
-                if ('main' in Define.urls) { Define.load('main'); }
+                eachProperty(Define.urls, function (url, id) { Define.load(id); });
 
                 return Define;
 
@@ -2244,7 +2273,7 @@
     set('Def', Def);
 
 
-    set('version', '1.0.0-rc.21'); set('just', just);
+    set('version', '1.0.0-rc.22'); set('just', just);
 
     return just;
 

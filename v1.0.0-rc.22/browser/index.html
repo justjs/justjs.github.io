@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
 	<meta charset='utf-8'/>
-	<title>Class: Def - Just js</title>
+	<title>Home - Just js</title>
 	<link type='text/css' rel='stylesheet' href='css/jsdoc-template.css'/>
 	<meta name="viewport" content="width=device-width,
                         initial-scale=1"/><link rel='shortcut icon' type='image/png' href='/img/favicon-16x16.png'/><link rel='stylesheet' href='../css/jsdoc.css'/>
@@ -28,18 +28,41 @@
 			<button id='page-header-opener' title='Toggle left bar' class='has-icon' data-css-icon='menu' type='button' data-gs-toggle='openPageHeader'>Toggle left bar</button>
 			<main id='content'>
 				<header>
-					<h1 id='content-title'>Class: Def</h1>
+					<h1 id='content-title'>Home</h1>
 				</header>
 				
 
 
 
-<article class='doc' data-kind='class' id='Def'>
+    
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<article class='doc' data-kind='file' id='core.js'>
 
 <header>
   
-    <h2><span class="attribs"><span class="type-signature"></span></span>
-        <span class="ancestors"><a href="just.html">just</a>.</span><a href='#Def'>Def</a><span class="signature">(id<span class="signature-attributes">nullable</span>, dependencyIDs, value)</span><span class="type-signature"></span></h2>
+    <h2><a href='#core.js'>core.js</a></h2>
     
         
     
@@ -49,49 +72,15 @@
     <div class="container-overview">
     
         
-<div id="Def" class='method member'>
+            <div class="description">Just js: The core for all your javascript proyects.</div>
+        
 
-    
-
-    
-    
-    
-
-    
-
-
-
-<div class="description">
-    Define a value after all dependencies became available.
-
-<br/>
-<aside class='note'>
-    <h3>A few things to consider: </h3>
-    <ul>
-        <li>This is not intended to be AMD compliant.</li>
-
-        <li>This does not check file contents, so it won't check if the
-            file defines an specific id.</li>
-
-        <li>Urls passed as dependencies are considered ids, so they must
-            be defined in <a href="just.Define.html#.urls">just.Define.urls</a> in order to be loaded first.</li>
-
-        <li><var>require</var>, <var>module</var> and <var>exports</var>
-            are not present in this loader, but you can emulate them.</li>
-
-        <li>Recursive and circular dependencies pass a recursive module
-           as argument within another recursive module (instead of the returned value).
-           Please, avoid using them or use them carefully.</li>
-    </ul>
-</aside>
-</div>
-
-
-
+        
 <dl class="details">
 
     
-
+    <dt class="tag-version">Version:</dt>
+    <dd class="tag-version">1.0.0-rc.22</dd>
     
 
     
@@ -110,6 +99,11 @@
 
     
 
+    
+
+    
+    <dt class="tag-license">License:</dt>
+    <dd class="tag-license">Copyright 2019-2020 Alexis Puga and contributors. See <a href="https://github.com/justjs/just" target="_blank" rel="noopener noreferrer">https://github.com/justjs/just</a>.</dd>
     
 
     
@@ -117,7 +111,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source">
-        <a href="core.js.html">core.js</a>, <a href="core.js.html#line1782">line 1782</a>
+        <a href="core.js.html">core.js</a>, <a href="core.js.html#line34">line 34</a>
     </dd>
     
 
@@ -131,214 +125,105 @@
 
 
 
-
-
-
-
-
-
-
-    <h3>Parameters:</h5>
-    
-<div class='table-wrapper'>
-<table class="params">
-    <thead>
-    <tr>
         
-        <th>Name</th>
+    
+  </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</article>
+
+
+
+
+
+
+<article class='doc' data-kind='file' id='core.min.js'>
+
+<header>
+  
+    <h2><a href='#core.min.js'>core.min.js</a></h2>
+    
+        
+    
+  
+</header>
+
+    <div class="container-overview">
+    
+        
+            <div class="description">Just js: The core for all your javascript proyects.</div>
         
 
-        <th>Type</th>
+        
+<dl class="details">
+
+    
+    <dt class="tag-version">Version:</dt>
+    <dd class="tag-version">1.0.0-rc.22</dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-license">License:</dt>
+    <dd class="tag-license">Copyright 2019-2020 Alexis Puga and contributors. See <a href="https://github.com/justjs/just" target="_blank" rel="noopener noreferrer">https://github.com/justjs/just</a>.</dd>
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+        <a href="core.min.js.html">core.min.js</a>, <a href="core.min.js.html#line33">line 33</a>
+    </dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
 
         
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <th class="name" scope='row'><var>id</var>
-                <br/>
-                
-                    <sub class="attributes">
-                    
-
-                    
-                        [nullable]
-                    
-
-                    
-                    </sub>
-                </th>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            <td class="description last">The module id.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <th class="name" scope='row'><var>dependencyIDs</var>
-                <br/>
-                
-                    <sub class="attributes">
-                    
-
-                    
-
-                    
-                    </sub>
-                </th>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string[]</span>
- or 
-
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            <td class="description last">Required module ids.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <th class="name" scope='row'><var>value</var>
-                <br/>
-                
-                    <sub class="attributes">
-                    
-
-                    
-
-                    
-                    </sub>
-                </th>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Any</span>
-
-
-            
-            </td>
-
-            
-
-            <td class="description last">The module value.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Example</h3>
-    
-    <div class='example-wrapper'>
-    <figure class='example'>
-        <figcaption class="code-caption" hidden><b>Example 1.</b></figcaption>
-        <pre class="prettyprint"><code>// https://some.cdn/js/just.js
-window.just = {'Define': function () {}};
-
-// index.html
-&lt; !DOCTYPE html>
-&lt; html data-just-Define='{"main": "/js/main.js"}'>
-&lt; head>
-   &lt; title>Test&lt;/title>
-   &lt; script src='https://some.cdn/js/just.js' async>&lt;/script>
-&lt; /head>
-&lt; body>
-&lt; /body>
-&lt; /html>
-
-// /js/main.js
-just.configure({
-   'globals': {
-       // Set justJs to window.just
-       'justJs': 'just'
-   },
-   'urls': {
-       // Load "/css/index.css" when "index.css" is required.
-       'index.css': '/css/index.css'
-   },
-   'nonScripts': {
-       // Call when "main.html" is required.
-       'main.html': function () { return '&lt;main>&lt;/main>'; }
-   }
-});
-
-// Load when document, justJs and index.css are ready:
-just.Define('main', ['justJs', 'index.css'], function (j) {
-
-   if (j.supportsTouch()) {
-       j.Define('mobile', 'https://example/m');
-       return;
-   }
-
-   j.Define('non-mobile', ['main.html']);
-
-});
-
-// Call only if j.supportsTouch()
-just.Define(['mobile'], function (url) {
-   window.redirect = url;
-});
-
-// Call when main.html is ready.
-just.Define(['non-mobile'], function (html) {
-   document.body.innerHTML = html;
-});</code></pre>
-    </figure>
-    </div>
-
-
-</div>
     
   </div>
 

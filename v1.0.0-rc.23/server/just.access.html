@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta charset='utf-8'/>
+	<title>Namespace: access - Just js</title>
+	<link type='text/css' rel='stylesheet' href='css/jsdoc-template.css'/>
+	<meta name="viewport" content="width=device-width,
+                        initial-scale=1"/><link rel='shortcut icon' type='image/png' href='/img/favicon-16x16.png'/><link rel='stylesheet' href='../css/jsdoc.css'/>
+</head>
+<body data-gs='{"openPageHeader": "is-page-header-open", "searching": "is-searching"}'>
+	<div id='page-wrapper'>
+		<header id='page-header' data-gs-target='openPageHeader'>
+			
+			<div id='logo'><a href='/'><img src='/img/logo-white-64x64.png' alt='Logo' srcset='/img/logo-white-128x128.png 2x'/></a></div>
+			
+			<nav id='content-nav'>
+				<header>
+					<div id='search'>
+						<div class='textfield-wrapper'>
+							<input type='search' name='q' placeholder='Search...' data-internal-search='#content-nav li a' data-gs-search='searching'/>
+						</div>
+					</div>
+				</header>
+				<h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><abbr title="Namespace">NS</abbr> <a href="just.access.html">access</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.check.html">check</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defaults.html">defaults</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defineProperties.html">defineProperties</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defineProperty.html">defineProperty</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defProp.html">defProp</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defProps.html">defProps</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.deprecate.html">deprecate</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.eachProp.html">eachProp</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.eachProperty.html">eachProperty</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.emptyObj.html">emptyObj</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.from.html">from</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.is.html">is</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.isEmptyObject.html">isEmptyObject</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.parseJSON.html">parseJSON</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.prop.html">prop</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.stringToJSON.html">stringToJSON</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toJSON.html">toJSON</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toObj.html">toObj</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toObjectLiteral.html">toObjectLiteral</a></li></ul><h3>Mixins</h3><ul><li><abbr title="Mixin">Mix</abbr> <a href="just.html">just</a></li></ul><h3>Global</h3><ul><li><abbr title="Global">Glo</abbr> <a href="global.html#set">set</a></li></ul>
+			</nav>
+		</header>
+		<div id='main-wrapper'>
+			<button id='page-header-opener' title='Toggle left bar' class='has-icon' data-css-icon='menu' type='button' data-gs-toggle='openPageHeader'>Toggle left bar</button>
+			<main id='content'>
+				<header>
+					<h1 id='content-title'>Namespace: access</h1>
+				</header>
+				
+
+
+
+<article class='doc' data-kind='namespace' id='access'>
+
+<header>
+  
+    <h2><span class="attribs"><span class="type-signature"></span></span>
+        <span class="ancestors"><a href="just.html">just</a>.</span><a href='#access'>access</a><span class="signature">(object<span class="signature-attributes">non-null</span>, path<span class="signature-attributes">opt</span>, handler<span class="signature-attributes">opt</span>, opts)</span><span class="type-signature"> &rarr; {*}</span></h2>
+    
+        
+    
+  
+</header>
+
+    <div class="container-overview">
+    
+        
+<div id="access" class='method member'>
+
+    
+
+    
+
+    
+
+
+
+<div class="description">
+    Accesses to a deep property in a new <var>object</var>
+(or <var>object</var> if <var>mutate</var> evals to `true`).
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+        <a href="access.js.html">access.js</a>, <a href="access.js.html#line86">line 86</a>
+    </dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+    <h3>Parameters:</h5>
+    
+<div class='table-wrapper'>
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>object</var>
+                <br/>
+                
+                    <sub class="attributes">
+                    
+
+                    
+
+                    
+                    </sub>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">The base object.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>path</var>
+                <br/>
+                
+                    <sub class="attributes">
+                    
+                        [optional]
+                    
+
+                    
+
+                    
+                    </sub>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string[]</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                    [path]
+                
+                </td>
+            
+
+            <td class="description last">The ordered keys.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>handler</var>
+                <br/>
+                
+                    <sub class="attributes">
+                    
+                        [optional]
+                    
+
+                    
+
+                    
+                    </sub>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="just.access.html#~handler">just.access~handler</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                    returnValue
+                
+                </td>
+            
+
+            <td class="description last">A custom function.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>opts</var>
+                <br/>
+                
+                    <sub class="attributes">
+                    
+
+                    
+
+                    
+                    </sub>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+<div class='table-wrapper'>
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>mutate</var>
+                <br/>
+                
+                    <sub class="attributes">
+                    
+                        [optional]
+                    
+
+                    
+
+                    
+                    </sub>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">If `true`, it will use
+    the given object as the base object, otherwise it will
+    copy all the owned properties to a new object.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>override</var>
+                <br/>
+                
+                    <sub class="attributes">
+                    
+                        [optional]
+                    
+
+                    
+
+                    
+                    </sub>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last">If `true`, and the
+    current value is different to `null` or `undefined`,
+    the function will throw a TypeError.
+    If `false`, the current value will be overriden by
+    an empty object if it's not an object nor `undefined`.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</div>
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<div class="param-desc">
+If some property causes access problems.
+</div>
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">TypeError</span>
+
+
+    </dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    If <var>handler</var> is given: the returned value of that function,
+        otherwise: the last value of <var>path</var> in the copied object.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Any</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Examples</h3>
+    
+    <div class='example-wrapper'>
+    <figure class='example'>
+        <figcaption class="code-caption"><b>Example 1:</b> Accessing to some existent property</figcaption>
+        <pre class="prettyprint"><code>access({a: {b: {c: {d: 4}}}}, ['a', 'b', 'c', 'd'], function (currentObject, currentKey, hasProperty, path) {
+    return hasProperty ? currentObject[currentKey] : null;
+}); // returns 4.</code></pre>
+    </figure>
+    </div>
+
+    <div class='example-wrapper'>
+    <figure class='example'>
+        <figcaption class="code-caption"><b>Example 2:</b> Accessing to some property with a non-JSON-like-object as a value</figcaption>
+        <pre class="prettyprint"><code>access({a: 1}, ['a', 'b', 'c']); // throws TypeError.
+access({a: 1}, ['a', 'b', 'c'], null, {
+    'override': true
+}); // returns undefined.
+// Doesn't throw because it replaces `1` with an empty object
+// and keeps accessing to the next properties.</code></pre>
+    </figure>
+    </div>
+
+    <div class='example-wrapper'>
+    <figure class='example'>
+        <figcaption class="code-caption"><b>Example 3:</b> Accessing to some non-existent property</figcaption>
+        <pre class="prettyprint"><code>var obj = {z: 1, prototype: [...]};
+var newObj = access(obj, 'a.b.c'.split('.'), function (currentObject, currentKey, hasProperty, path) {
+
+    if (!hasProperty) {
+        currentObject[currentKey] = path.length;
+    }
+
+    // At this point:
+    //     `obj` is {z: 1},
+    //     `currentObject` has a value in `currentKey`,
+    //     and `this` has all the added keys (even the ones modified in `currentObject`).
+    return this;
+
+}); // returns {z: 1, a: {b: {c: 3}}}
+
+// if you want the prototype chain of obj, just copy it.
+Object.assign(newObj.prototype, obj.prototype);</code></pre>
+    </figure>
+    </div>
+
+    <div class='example-wrapper'>
+    <figure class='example'>
+        <figcaption class="code-caption"><b>Example 4:</b> Modifying the base object</figcaption>
+        <pre class="prettyprint"><code>var obj = {a: {b: false}, b: {b: false}, prototype: [...]};
+
+access(obj, 'a.b'.split('.'), function (currentObject, currentKey, hasProperty, path) {
+    currentObject[currentKey] = 2;
+}, true);
+
+// now `obj` is {a: {a: true}, b: {b: true}, prototype: [...]}.</code></pre>
+    </figure>
+    </div>
+
+
+</div>
+    
+  </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<div id="~handler" class='method member'>
+
+    
+
+    
+    <h4 class="name"><span class="type-signature"></span><a href='#~handler'>handler</a><span class="signature">(lastObject<span class="signature-attributes">non-null</span>, lastKey, hasProperty, path)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    A function to call when <a href="just.access.html">just.access</a> reaches the deep property of an object.
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+        <a href="access.js.html">access.js</a>, <a href="access.js.html#line8">line 8</a>
+    </dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>This:</h5>
+    <p><a href="just.access.html#~handler_this">just.access~handler_this</a></p>
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class='table-wrapper'>
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>lastObject</var>
+                <br/>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last">The object containing the <var>lastKey</var>.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>lastKey</var>
+                <br/>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last">The last value given in <var>path</var>.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>hasProperty</var>
+                <br/>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last">`false` if some key of <var>path</var>
+    was created, `true` otherwise.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <th class="name" scope='row'><var>path</var>
+                <br/>
+                </th>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string[]</span>
+
+
+            
+            </td>
+
+            
+
+            <td class="description last">The given keys.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The return value for <a href="just.access.html">the main function</a>.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Any</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+</div>
+            
+                
+<div id="~handler_this" class='member'>
+<h4 class="name"><a href='#~handler_this'>handler_this</a></h4>
+
+
+
+
+<div class="description">
+    The given object (if <var>mutate</var> evals to `true`)
+or a copy of each own property of the given object.
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+        <a href="access.js.html">access.js</a>, <a href="access.js.html#line1">line 1</a>
+    </dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Type:</h5>
+    <p>
+<span class="param-type">object</span>
+
+</p>
+
+
+
+
+
+</div>
+            
+    
+
+    
+
+</article>
+
+
+
+
+			</main>
+			<footer id='page-footer'>
+				<small>Documentation generated by <a href='https://github.com/jsdoc/jsdoc' rel='noreferrer noopener' target='_blank'>JSDoc 3.6.3</a>.</small>
+				<small style='margin-left: 1em;'>Design by <a
+                        href='https://github.com/AlexisPuga'
+                        target='_blank'
+                        rel="noopener noreferrer">Alexis Puga</a>.</small>
+			</footer>
+		</div>
+	</div>
+	<script src='js/jsdoc-template.js' async></script>
+	
+	<script src='js/prettify.min.js' async></script>
+	<link rel='stylesheet' type='text/css' href='css/tomorrow.min.css'/>
+	
+	
+</body>
+</html>

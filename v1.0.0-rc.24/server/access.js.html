@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Source: access.js - Just js</title><link type="text/css" rel="stylesheet" href="css/jsdoc-template.css"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="shortcut icon" type="image/png" href="/img/favicon-16x16.png"><link rel="stylesheet" href="../css/jsdoc.css"></head><body data-gs='{"openPageHeader": "is-page-header-open", "searching": "is-searching"}'><div id="page-wrapper"><header id="page-header" data-gs-target="openPageHeader"><div id="logo"><a href="/"><img src="/img/logo-white-64x64.png" alt="Logo" srcset="/img/logo-white-128x128.png 2x"></a></div><nav id="content-nav"><header><div id="search"><div class="textfield-wrapper"><input type="search" name="q" placeholder="Search..." data-internal-search="#content-nav li a" data-gs-search="searching"></div></div></header><h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><abbr title="Namespace">NS</abbr> <a href="just.access.html">access</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.check.html">check</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defaults.html">defaults</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defineProperties.html">defineProperties</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defineProperty.html">defineProperty</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defProp.html">defProp</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defProps.html">defProps</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.deprecate.html">deprecate</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.eachProp.html">eachProp</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.eachProperty.html">eachProperty</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.emptyObj.html">emptyObj</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.from.html">from</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.is.html">is</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.isEmptyObject.html">isEmptyObject</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.parseJSON.html">parseJSON</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.prop.html">prop</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.stringToJSON.html">stringToJSON</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toJSON.html">toJSON</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toObj.html">toObj</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toObjectLiteral.html">toObjectLiteral</a></li></ul><h3>Mixins</h3><ul><li><abbr title="Mixin">Mix</abbr> <a href="just.html">just</a></li></ul><h3>Global</h3><ul><li><abbr title="Global">Glo</abbr> <a href="global.html#set">set</a></li></ul></nav></header><div id="main-wrapper"><button id="page-header-opener" title="Toggle left bar" class="has-icon" data-css-icon="menu" type="button" data-gs-toggle="openPageHeader">Toggle left bar</button><main id="content"><header><h1 id="content-title">Source: access.js</h1></header><figure class="source-code-wrapper"><pre class="prettyprint source linenums"><code>/**
+ * The given object (if &lt;var>mutate&lt;/var> evals to `true`)
+ * or a copy of each own property of the given object.
+ *
+ * @typedef {!object} just.access~handler_this
+ */
+
+/**
+ * A function to call when {@link just.access} reaches the deep property of an object.
+ *
+ * @typedef {function} just.access~handler
+ * @this just.access~handler_this
+ * @param {!object} lastObject - The object containing the &lt;var>lastKey&lt;/var>.
+ * @param {string} lastKey - The last value given in &lt;var>path&lt;/var>.
+ * @param {boolean} hasProperty - `false` if some key of &lt;var>path&lt;/var>
+ *     was created, `true` otherwise.
+ * @param {string[]} path - The given keys.
+ * @return {*} The return value for {@link just.access|the main function}.
+ */
+
+/**
+ * Accesses to a deep property in a new &lt;var>object&lt;/var>
+ * (or &lt;var>object&lt;/var> if &lt;var>mutate&lt;/var> evals to `true`).
+ *
+ * @namespace
+ * @memberof just
+ * @param {!object} object - The base object.
+ * @param {string[]} [path=[path]] - The ordered keys.
+ * @param {just.access~handler} [handler=returnValue] - A custom function.
+ * @param {object} opts
+ * @param {boolean} [opts.mutate=false] - If `true`, it will use
+ *     the given object as the base object, otherwise it will
+ *     copy all the owned properties to a new object.
+ * @param {boolean} [opts.override=true] - If `true`, and the
+ *     current value is different to `null` or `undefined`,
+ *     the function will throw a TypeError.
+ *     If `false`, the current value will be overriden by
+ *     an empty object if it's not an object nor `undefined`.
+ *
+ * @throws {TypeError} If some property causes access problems.
+ *
+ * @example &lt;caption>Accessing to some existent property&lt;/caption>
+ * access({a: {b: {c: {d: 4}}}}, ['a', 'b', 'c', 'd'], function (currentObject, currentKey, hasProperty, path) {
+ *     return hasProperty ? currentObject[currentKey] : null;
+ * }); // returns 4.
+ *
+ * @example &lt;caption>Accessing to some property with a non-JSON-like-object as a value&lt;/caption>
+ * access({a: 1}, ['a', 'b', 'c']); // throws TypeError.
+ * access({a: 1}, ['a', 'b', 'c'], null, {
+ *     'override': true
+ * }); // returns undefined.
+ * // Doesn't throw because it replaces `1` with an empty object
+ * // and keeps accessing to the next properties.
+ *
+ * @example &lt;caption>Accessing to some non-existent property&lt;/caption>
+ * var obj = {z: 1, prototype: [...]};
+ * var newObj = access(obj, 'a.b.c'.split('.'), function (currentObject, currentKey, hasProperty, path) {
+ *
+ *     if (!hasProperty) {
+ *         currentObject[currentKey] = path.length;
+ *     }
+ *
+ *     // At this point:
+ *     //     `obj` is {z: 1},
+ *     //     `currentObject` has a value in `currentKey`,
+ *     //     and `this` has all the added keys (even the ones modified in `currentObject`).
+ *     return this;
+ *
+ * }); // returns {z: 1, a: {b: {c: 3}}}
+ *
+ * // if you want the prototype chain of obj, just copy it.
+ * Object.assign(newObj.prototype, obj.prototype);
+ *
+ * @example &lt;caption>Modifying the base object&lt;/caption>
+ * var obj = {a: {b: false}, b: {b: false}, prototype: [...]};
+ *
+ * access(obj, 'a.b'.split('.'), function (currentObject, currentKey, hasProperty, path) {
+ *     currentObject[currentKey] = 2;
+ * }, true);
+ *
+ * // now `obj` is {a: {a: true}, b: {b: true}, prototype: [...]}.
+ *
+ * @return {*} If &lt;var>handler&lt;/var> is given: the returned value of that function,
+ *         otherwise: the last value of &lt;var>path&lt;/var> in the copied object.
+ */
+function access (object, path, handler, opts) {
+
+    var options = Object.assign({
+        'override': true,
+        'mutate': false
+    }, opts);
+    var properties = (Array.isArray(path)
+        ? path
+        : [path]
+    );
+    var initialObject = (options.mutate
+        ? object
+        : Object.assign({}, object)
+    );
+    var currentObject = initialObject;
+    var isNewProperty = false;
+    var lastKey = properties[properties.length - 1];
+    var hasProperty;
+
+    properties.slice(0, -1).forEach(function (key, i) {
+
+        var value = currentObject[key];
+
+        if (!(value instanceof Object)) {
+
+            if (typeof value !== 'undefined' &amp;&amp; value !== null &amp;&amp; !options.override) {
+
+                throw new TypeError(key + ' is not an object.');
+
+            }
+
+            isNewProperty = true;
+            currentObject[key] = value = {};
+
+        }
+
+        currentObject = value;
+
+    });
+
+    hasProperty = lastKey in currentObject &amp;&amp; !isNewProperty;
+
+    return (handler
+        ? handler.call(initialObject, currentObject, lastKey, hasProperty, properties)
+        : currentObject[lastKey]
+    );
+
+}
+
+module.exports = access;
+</code></pre></figure></main><footer id="page-footer"><small>Documentation generated by <a href="https://github.com/jsdoc/jsdoc" rel="noreferrer noopener" target="_blank">JSDoc 3.6.4</a>.</small> <small style="margin-left:1em">Design by <a href="https://github.com/AlexisPuga" target="_blank" rel="noopener noreferrer">Alexis Puga</a>.</small></footer></div></div><script src="js/jsdoc-template.js" async></script><script src="js/prettify.min.js" async></script><link rel="stylesheet" type="text/css" href="css/tomorrow.min.css"></body></html>

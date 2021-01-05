@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Source: defineProperty.js - Just js</title><link type="text/css" rel="stylesheet" href="css/jsdoc-template.css"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="shortcut icon" type="image/png" href="/img/favicon-16x16.png"><link rel="stylesheet" href="../css/jsdoc.css"></head><body data-gs='{"openPageHeader": "is-page-header-open", "searching": "is-searching"}'><div id="page-wrapper"><header id="page-header" data-gs-target="openPageHeader"><div id="logo"><a href="/"><img src="/img/logo-white-64x64.png" alt="Logo" srcset="/img/logo-white-128x128.png 2x"></a></div><nav id="content-nav"><header><div id="search"><div class="textfield-wrapper"><input type="search" name="q" placeholder="Search..." data-internal-search="#content-nav li a" data-gs-search="searching"></div></div></header><h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><abbr title="Namespace">NS</abbr> <a href="just.access.html">access</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.check.html">check</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defaults.html">defaults</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defineProperties.html">defineProperties</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defineProperty.html">defineProperty</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defProp.html">defProp</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.defProps.html">defProps</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.deprecate.html">deprecate</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.eachProp.html">eachProp</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.eachProperty.html">eachProperty</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.emptyObj.html">emptyObj</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.from.html">from</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.is.html">is</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.isEmptyObject.html">isEmptyObject</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.parseJSON.html">parseJSON</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.prop.html">prop</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.stringToJSON.html">stringToJSON</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toJSON.html">toJSON</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toObj.html">toObj</a></li><li><abbr title="Namespace">NS</abbr> <a href="just.toObjectLiteral.html">toObjectLiteral</a></li></ul><h3>Mixins</h3><ul><li><abbr title="Mixin">Mix</abbr> <a href="just.html">just</a></li></ul><h3>Global</h3><ul><li><abbr title="Global">Glo</abbr> <a href="global.html#set">set</a></li></ul></nav></header><div id="main-wrapper"><button id="page-header-opener" title="Toggle left bar" class="has-icon" data-css-icon="menu" type="button" data-gs-toggle="openPageHeader">Toggle left bar</button><main id="content"><header><h1 id="content-title">Source: defineProperty.js</h1></header><figure class="source-code-wrapper"><pre class="prettyprint source linenums"><code>/**
+ * Alternative to &lt;var>Object.defineProperty&lt;/var> with more enhancements.
+ *
+ * &lt;br>
+ * &lt;aside class='note'>
+ *     &lt;h3>A few things to consider (see examples):&lt;/h3>
+ *     &lt;ul>
+ *         &lt;li>If &lt;var>object&lt;/var> contains invalid {@link propertyDescriptor|property descriptor attributes},
+ *             the value WON'T be used as a property descriptor.&lt;/li>
+ *         &lt;li>Empty objects will be considered values.&lt;/li>
+ *     &lt;/ul>
+ * &lt;/aside>
+ *
+ * @namespace
+ * @memberof just
+ * @throws &lt;var>Object.defineProperty&lt;/var> exceptions.
+ * @param {!object} object - The target.
+ * @param {string} key - Key for the property.
+ * @param {!object} [value={'value': value}] - A {@link propertyDescriptor|property descriptor} or some value.
+ * @example &lt;caption>Define a property using a value.&lt;/caption>
+ * defineProperty({}, 'a', 1); // Same as Object.defineProperty({}, 'a', {'value': 1})
+ *
+ * @example &lt;caption>Define a property using a {@link propertyDescriptor|property descriptor}.&lt;/caption>
+ * defineProperty({}, 'a', {'writable': true}); // Same as Object.defineProperty({}, 'a', {'writable': true})
+ *
+ * @example &lt;caption>Define a property with an empty object.&lt;/caption>
+ * defineProperty({}, 'a', {}); // Same as Object.defineProperty({}, 'a', {'value': {}});
+ *
+ * @return &lt;var>object&lt;/var>.
+ */
+function defineProperty (object, key, value) {
+
+    var descriptor = Object(value);
+    var defaultDescriptors = ['value', 'writable', 'get', 'set', 'configurable', 'enumerable'];
+    var descriptorKeys = Object.keys(descriptor);
+    var isEmptyObject = !descriptorKeys.length;
+    var notADescriptor = isEmptyObject || descriptorKeys.some(
+        function notInDescriptors (key) { return this.indexOf(key) === -1; },
+        defaultDescriptors
+    );
+
+    if (notADescriptor) {
+
+        descriptor = {
+            'value': value
+        };
+
+    }
+
+    Object.defineProperty(object, key, descriptor);
+
+    return object;
+
+}
+
+module.exports = defineProperty;
+</code></pre></figure></main><footer id="page-footer"><small>Documentation generated by <a href="https://github.com/jsdoc/jsdoc" rel="noreferrer noopener" target="_blank">JSDoc 3.6.6</a>.</small> <small style="margin-left:1em">Design by <a href="https://github.com/AlexisPuga" target="_blank" rel="noopener noreferrer">Alexis Puga</a>.</small></footer></div></div><script src="js/jsdoc-template.js" async></script><script src="js/prettify.min.js" async></script><link rel="stylesheet" type="text/css" href="css/tomorrow.min.css"></body></html>

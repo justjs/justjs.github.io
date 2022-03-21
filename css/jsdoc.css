@@ -1,0 +1,59 @@
+a {
+	color: #54184d;
+}
+
+#logo {
+	padding: 60px 0;
+}
+
+#logo a {
+	display: table;
+	margin: auto;
+}
+
+#logo img {
+	/* Remove padding from versions below 1.2.0 */
+	padding: 0;
+}
+
+#page-header select {
+	color: white;
+	background: rgba(127, 127, 137, .2);
+	padding: .5em;
+}
+
+#page-header select:hover,
+#page-header select:focus {
+	background: rgba(127, 127, 137, .3);
+}
+
+#page-header .wrapper,
+/* Versions below 1.2.0 don't have a wrapper. */
+#versions {
+	margin-left: auto;
+	display: table;
+}
+
+#page-header .wrapper > * {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#page-header .wrapper > *:not(:first-child) {
+	margin-left: 1em;
+}
+
+td.description {
+	min-width: 20em;
+}
+
+@media all and (max-width: 767px) {
+	.doc h1, .doc h2 {
+		font-size: 150%;
+		margin-bottom: 1em;
+	}
+
+	.signature {
+		font-size: 1rem;
+	}
+}
